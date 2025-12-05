@@ -314,6 +314,7 @@ body.dark-mode .nav-header.scrolled {
 }
 
 .text-content h2 {
+    /* DESKTOP STYLES: Keep it inline with rest of content */
     font-size: clamp(20px, 4vw, 45px);
     margin-top: 0; 
     display: block; 
@@ -862,10 +863,36 @@ body.dark-mode .nav-header.scrolled {
     .text-content h1 {
         white-space: normal; /* Allow h1 to wrap on mobile */
     }
+    
+    /* ====================================== */
+    /* 🔥 NEW RULES: Roles Bigger and Centered (Mobile) */
+    /* ====================================== */
+    
+    /* Target the main H2 container for text alignment and size control */
     .text-content h2 {
-        display: block;
+        text-align: center; /* Center all contents of the H2 */
+        /* Set a larger, responsive size for the entire job title */
+        font-size: clamp(28px, 6vw, 50px); 
+        margin-top: 10px;
+        margin-bottom: 10px;
+        line-height: 1.2;
     }
 
+    /* Target the container holding the animating words */
+    .changing-text {
+        /* Ensure the animated container is block-level and centers correctly */
+        display: block; 
+        min-width: unset;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    /* Ensure the static text part also inherits centering and size */
+    .static-h2-text {
+        display: block; /* Important to put the static text on its own line */
+        text-align: center;
+    }
+    
     /* --- FULL-WIDTH CARD FIXES --- */
     
     .about-container {
