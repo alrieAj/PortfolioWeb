@@ -1,18 +1,4 @@
-/* ===================================================================
-   script.js — Full, optimized client-side behavior for portfolio
-   Features:
-   - Mobile hamburger menu (accessible)
-   - Scroll-spy using IntersectionObserver (adaptive)
-   - Smooth scrolling with header offset
-   - Language dropdown + translation (RTL support)
-   - Dark mode / light mode toggle + background video swap
-   - Persistence via localStorage for theme & language
-   - Defensive checks and event delegation for performance
-   =================================================================== */
 
-/* -------------------------
-   TRANSLATIONS (from user)
-   ------------------------- */
 const translations = {
   'en': {
     'nav_home': 'Home', 'nav_about': 'About', 'nav_skills': 'Skills', 'nav_projects': 'Projects', 'nav_contact': 'Contact',
@@ -36,7 +22,8 @@ const translations = {
     'form_email_label': 'Email:', 'form_email_ph': 'your.email',
     'form_subject_label': 'Subject:', 'form_subject_ph': 'Briefly what this is about',
     'form_message_label': 'Message:', 'form_message_ph': 'Tell me about your project or inquiry',
-    'form_button': 'Send Message'
+    'form_button': 'Send Message',
+    'footer_copyright': '© 2025 Albert Pingol. All Rights Reserved.'
   },
   'es': {
     'nav_home': 'Inicio', 'nav_about': 'Acerca de', 'nav_skills': 'Habilidades', 'nav_projects': 'Proyectos', 'nav_contact': 'Contacto',
@@ -60,7 +47,8 @@ const translations = {
     'form_email_label': 'Correo Electrónico:', 'form_email_ph': 'tu.correo',
     'form_subject_label': 'Asunto:', 'form_subject_ph': 'Brevemente de qué se trata',
     'form_message_label': 'Mensaje:', 'form_message_ph': 'Cuéntame sobre tu proyecto o consulta',
-    'form_button': 'Enviar Mensaje'
+    'form_button': 'Enviar Mensaje',
+    'footer_copyright': '© 2025 Albert Pingol. Todos los Derechos Reservados.'
   },
   'tl': {
     'nav_home': 'Tahanan', 'nav_about': 'Tungkol sa Akin', 'nav_skills': 'Kasanayan', 'nav_projects': 'Mga Proyekto', 'nav_contact': 'Kontakin',
@@ -84,7 +72,8 @@ const translations = {
     'form_email_label': 'Email:', 'form_email_ph': 'iyong.email',
     'form_subject_label': 'Paksa:', 'form_subject_ph': 'Maikling tungkol saan ito',
     'form_message_label': 'Mensahe:', 'form_message_ph': 'Sabihin sa akin ang tungkol sa iyong proyekto o katanungan',
-    'form_button': 'Ipadala ang Mensahe'
+    'form_button': 'Ipadala ang Mensahe',
+    'footer_copyright': '© 2025 Albert Pingol. Lahat ng Karapatan ay Nakalaan.'
   },
   'zh': {
     'nav_home': '主页', 'nav_about': '关于', 'nav_skills': '技能', 'nav_projects': '项目', 'nav_contact': '联系',
@@ -108,7 +97,8 @@ const translations = {
     'form_email_label': '电子邮件:', 'form_email_ph': '您的.邮箱',
     'form_subject_label': '主题:', 'form_subject_ph': '简要说明此事的目的',
     'form_message_label': '消息:', 'form_message_ph': '告诉我您的项目或咨询详情',
-    'form_button': '发送消息'
+    'form_button': '发送消息',
+    'footer_copyright': '© 2025 Albert Pingol. 保留所有权利。'
   },
   'fr': {
     'nav_home': 'Accueil', 'nav_about': 'À Propos', 'nav_skills': 'Compétences', 'nav_projects': 'Projets', 'nav_contact': 'Contact',
@@ -132,7 +122,8 @@ const translations = {
     'form_email_label': 'E-mail:', 'form_email_ph': 'votre.email',
     'form_subject_label': 'Sujet:', 'form_subject_ph': 'Brève description de l’objet',
     'form_message_label': 'Message:', 'form_message_ph': 'Parlez-moi de votre projet ou de votre demande',
-    'form_button': 'Envoyer le Message'
+    'form_button': 'Envoyer le Message',
+    'footer_copyright': '© 2025 Albert Pingol. Tous droits réservés.'
   },
   'de': {
     'nav_home': 'Startseite', 'nav_about': 'Über Mich', 'nav_skills': 'Fähigkeiten', 'nav_projects': 'Projekte', 'nav_contact': 'Kontakt',
@@ -156,7 +147,8 @@ const translations = {
     'form_email_label': 'E-Mail:', 'form_email_ph': 'ihre.email',
     'form_subject_label': 'Betreff:', 'form_subject_ph': 'Kurz, worum es geht',
     'form_message_label': 'Nachricht:', 'form_message_ph': 'Erzählen Sie mir von Ihrem Projekt oder Ihrer Anfrage',
-    'form_button': 'Nachricht Senden'
+    'form_button': 'Nachricht Senden',
+    'footer_copyright': '© 2025 Albert Pingol. Alle Rechte vorbehalten.'
   },
   'ar': {
     'nav_home': 'الرئيسية', 'nav_about': 'حول', 'nav_skills': 'المهارات', 'nav_projects': 'المشاريع', 'nav_contact': 'اتصال',
@@ -180,13 +172,14 @@ const translations = {
     'form_email_label': 'البريد الإلكتروني:', 'form_email_ph': 'بريدك.الإلكتروني',
     'form_subject_label': 'الموضوع:', 'form_subject_ph': 'مختصر عن سبب الاتصال',
     'form_message_label': 'الرسالة:', 'form_message_ph': 'أخبرني عن مشروعك أو استفسارك',
-    'form_button': 'إرسال الرسالة'
+    'form_button': 'إرسال الرسالة',
+    'footer_copyright': '© 2025 ألبرت بينغول. جميع الحقوق محفوظة.'
   }
 };
 
 /* -------------------------
-   CONFIG / CONSTANTS
-   ------------------------- */
+    CONFIG / CONSTANTS
+    ------------------------- */
 const SELECTORS = {
   menuToggle: '.menu-toggle',
   navLinksPanel: '.nav-links',
@@ -207,12 +200,13 @@ const VIDEO = {
 
 const ICON = {
   moon: '🌙',
-  sun: '☀️'
+  sun: '☀️',
+  earth: '🌍'
 };
 
 /* -------------------------
-   UTILITY HELPERS
-   ------------------------- */
+    UTILITY HELPERS
+    ------------------------- */
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
@@ -233,8 +227,8 @@ function throttle(fn, wait = 100) {
 }
 
 /* -------------------------
-   THEME (DARK / LIGHT) LOGIC
-   ------------------------- */
+    THEME (DARK / LIGHT) LOGIC
+    ------------------------- */
 function applyTheme(isDark) {
   const body = document.body;
   body.classList.toggle('dark-mode', !!isDark);
@@ -278,8 +272,8 @@ function loadThemeOnStart() {
 }
 
 /* -------------------------
-   MOBILE MENU TOGGLE
-   ------------------------- */
+    MOBILE MENU TOGGLE
+    ------------------------- */
 function initMenuToggle() {
   const toggle = $(SELECTORS.menuToggle);
   const navPanel = $(SELECTORS.navLinksPanel);
@@ -310,19 +304,27 @@ function initMenuToggle() {
   // Accessibility: close menu with Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      toggle.classList.remove('active');
-      navPanel.classList.remove('active');
-      safeSetAttr(toggle, 'aria-expanded', 'false');
+      // Close hamburger menu
+      if (toggle.classList.contains('active')) {
+        toggle.classList.remove('active');
+        navPanel.classList.remove('active');
+        safeSetAttr(toggle, 'aria-expanded', 'false');
+      }
+      
       // also close language dropdown if open
       const langC = $(SELECTORS.langContainer);
-      if (langC) langC.classList.remove('active');
+      if (langC && langC.classList.contains('active')) {
+        langC.classList.remove('active');
+        const langBtn = document.getElementById(SELECTORS.langButtonId);
+        safeSetAttr(langBtn, 'aria-expanded', 'false');
+      }
     }
   });
 }
 
 /* -------------------------
-   SMOOTH SCROLL (header offset handling)
-   ------------------------- */
+    SMOOTH SCROLL (header offset handling)
+    ------------------------- */
 function getHeaderOffset() {
   const header = $(SELECTORS.header);
   if (!header) return 0;
@@ -358,8 +360,26 @@ function initAnchorSmoothScroll() {
 }
 
 /* -------------------------
-   SCROLL-SPY using IntersectionObserver
-   ------------------------- */
+    STICKY HEADER / SCROLL STATE
+    ------------------------- */
+function handleScrollState() {
+  const header = $(SELECTORS.header);
+  if (!header) return;
+
+  const isScrolled = window.scrollY > 50;
+  header.classList.toggle('scrolled', isScrolled);
+}
+
+function initScrollStateListener() {
+    // Initial check
+    handleScrollState(); 
+    // Listen to scroll events (throttled for performance)
+    window.addEventListener('scroll', throttle(handleScrollState, 10));
+}
+
+/* -------------------------
+    SCROLL-SPY using IntersectionObserver
+    ------------------------- */
 function initScrollSpy() {
   const sections = $$('section[id]');
   const navAnchors = $$(SELECTORS.navLinksAnchor);
@@ -376,11 +396,20 @@ function initScrollSpy() {
 
   // Decide observer options adaptively for mobile/desktop
   function getObserverOptions() {
-    if (window.innerWidth <= 768) {
-      return { root: null, rootMargin: '-20% 0px -50% 0px', threshold: 0.05 };
-    } else {
-      return { root: null, rootMargin: '-30% 0px -30% 0px', threshold: 0.1 };
-    }
+    // Dynamically calculate the header offset for margin
+    const offset = getHeaderOffset(); 
+    // Set a large top margin (negative value pulls the trigger line up) 
+    // to detect section entry early.
+    const rootMarginTop = `-${offset}px`; 
+    // Set a large bottom margin to ensure the current section remains active 
+    // until a significant portion of the next section is visible.
+    const rootMarginBottom = window.innerHeight > 800 ? '-30%' : '-15%';
+
+    return { 
+        root: null, 
+        rootMargin: `${rootMarginTop} 0px ${rootMarginBottom} 0px`, 
+        threshold: 0.05 
+    };
   }
 
   let observer = null;
@@ -389,13 +418,15 @@ function initScrollSpy() {
     if (observer) observer.disconnect();
 
     observer = new IntersectionObserver((entries) => {
-      // Choose the most visible entry (largest intersectionRatio)
-      const visible = entries.filter(e => e.isIntersecting);
-      if (!visible.length) return;
+      // Find the currently intersecting entry closest to the top
+      const topVisible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
+        [0]; 
 
-      visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-      const top = visible[0];
-      setActiveById(top.target.id);
+      if (topVisible) {
+        setActiveById(topVisible.target.id);
+      }
     }, getObserverOptions());
 
     sections.forEach(s => observer.observe(s));
@@ -417,8 +448,8 @@ function initScrollSpy() {
 }
 
 /* -------------------------
-   LANGUAGE DROPDOWN & TRANSLATION
-   ------------------------- */
+    LANGUAGE DROPDOWN & TRANSLATION
+    ------------------------- */
 function applyTranslations(lang) {
   const dict = translations[lang] || translations['en'];
   // map data-i18n
@@ -448,9 +479,9 @@ function applyTranslations(lang) {
   // update language icon/display if present
   const langBtn = document.getElementById(SELECTORS.langButtonId);
   if (langBtn) {
-    // show the language code or flag — keep it short
-    langBtn.textContent = lang.toUpperCase();
-    langBtn.setAttribute('aria-label', `Language: ${lang}`);
+    // Show the Earth icon, but update ARIA label to communicate the current language
+    langBtn.textContent = ICON.earth; 
+    safeSetAttr(langBtn, 'aria-label', `Language: ${lang.toUpperCase()}`);
   }
 
   try {
@@ -468,7 +499,8 @@ function initLanguageDropdown() {
   // toggle dropdown
   container.addEventListener('click', (ev) => {
     ev.stopPropagation();
-    container.classList.toggle('active');
+    const isActive = container.classList.toggle('active');
+    safeSetAttr(langBtn, 'aria-expanded', String(isActive));
   });
 
   // pick language
@@ -477,7 +509,10 @@ function initLanguageDropdown() {
       ev.stopPropagation();
       const chosen = opt.getAttribute('data-lang');
       if (chosen) applyTranslations(chosen);
+      
+      // Close dropdown and update ARIA state
       container.classList.remove('active');
+      safeSetAttr(langBtn, 'aria-expanded', 'false');
     });
   });
 
@@ -485,25 +520,14 @@ function initLanguageDropdown() {
   document.addEventListener('click', (ev) => {
     if (container.classList.contains('active') && !container.contains(ev.target)) {
       container.classList.remove('active');
+      safeSetAttr(langBtn, 'aria-expanded', 'false');
     }
   });
-
-  // keyboard: close on Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && container.classList.contains('active')) {
-      container.classList.remove('active');
-    }
-  });
-
-  // set aria attributes
-  safeSetAttr(container, 'role', 'menu');
-  safeSetAttr(langBtn, 'aria-haspopup', 'true');
-  safeSetAttr(langBtn, 'aria-expanded', 'false');
 }
 
 /* -------------------------
-   INITIALIZATION (load preferences)
-   ------------------------- */
+    INITIALIZATION (load preferences)
+    ------------------------- */
 function loadLanguageOnStart() {
   let saved = 'en';
   try {
@@ -516,8 +540,8 @@ function loadLanguageOnStart() {
 }
 
 /* -------------------------
-   DARK MODE BUTTON HANDLER
-   ------------------------- */
+    DARK MODE BUTTON HANDLER
+    ------------------------- */
 function initDarkModeToggle() {
   const btn = document.getElementById(SELECTORS.darkToggleId);
   if (!btn) return;
@@ -528,8 +552,8 @@ function initDarkModeToggle() {
 }
 
 /* -------------------------
-   TIDY: Remove potential focus outlines on mouse use but keep for keyboard (small UX nicety)
-   ------------------------- */
+    TIDY: Remove potential focus outlines on mouse use but keep for keyboard (small UX nicety)
+    ------------------------- */
 function initFocusStyleToggle() {
   function handleMouseDown() { document.body.classList.add('using-mouse'); }
   function handleKeyDown(e) {
@@ -540,8 +564,8 @@ function initFocusStyleToggle() {
 }
 
 /* -------------------------
-   BOOTSTRAP: Run on DOMContentLoaded
-   ------------------------- */
+    BOOTSTRAP: Run on DOMContentLoaded
+    ------------------------- */
 document.addEventListener('DOMContentLoaded', () => {
   // Theme & language first, so visible elements render correctly
   loadThemeOnStart();
@@ -554,6 +578,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initLanguageDropdown();
   initDarkModeToggle();
   initFocusStyleToggle();
+  initScrollStateListener(); // Added sticky header listener
 
   // Ensure home link is active immediately (if present)
   const homeAnchor = document.querySelector('.nav-links a[href="#home"]');
