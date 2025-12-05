@@ -5,18 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Albert Pingol | Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css"> 
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <video autoplay muted loop class="bg-video">
+    <video autoplay muted loop class="bg-video" poster="images/background_poster.jpg">
         <source id="background-video-source" src="videos/background.mp4" type="video/mp4">
     </video>
 
     <header class="nav-header">
+        
         <a href="#home" class="logo">
             <img src="images/logo.png" alt="Logo">
         </a>
+        
         <nav class="nav-links">
             <ul>
                 <li><a href="#home" class="active" data-i18n="nav_home">Home</a></li>
@@ -26,32 +28,31 @@
                 <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
             </ul>
         </nav>
-        <div class="menu-toggle">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
         
         <div class="icon-controls">
             
-           <div class="lang-dropdown-container">
-                <span id="language-icon" class="icon-button">&#127760;</span> 
-                    <div class="lang-dropdown-content">
-                        <span class="lang-option" data-lang="en">English (EN)</span>
-                        <span class="lang-option" data-lang="es">Español (ES)</span>
-                        <span class="lang-option" data-lang="tl">Tagalog (TL)</span>
-                        
-                        <span class="lang-option" data-lang="zh">中文 (ZH)</span>
-                        <span class="lang-option" data-lang="fr">Français (FR)</span>
-                        <span class="lang-option" data-lang="de">Deutsch (DE)</span>
-                        <span class="lang-option" data-lang="ar">العربية (AR)</span>
-                    </div>
+            <div class="lang-dropdown-container">
+                <button id="language-icon" class="icon-button" aria-label="Select Language">&#127760;</button> 
+                <div class="lang-dropdown-content">
+                    <span class="lang-option" data-lang="en">English (EN)</span>
+                    <span class="lang-option" data-lang="es">Español (ES)</span>
+                    <span class="lang-option" data-lang="tl">Tagalog (TL)</span>
+                    <span class="lang-option" data-lang="zh">中文 (ZH)</span>
+                    <span class="lang-option" data-lang="fr">Français (FR)</span>
+                    <span class="lang-option" data-lang="de">Deutsch (DE)</span>
+                    <span class="lang-option" data-lang="ar">العربية (AR)</span>
+                </div>
             </div>
 
             <button id="darkModeToggle" class="icon-button" aria-label="Toggle dark mode">
                 &#127769; </button>
         </div>
         
+        <div class="menu-toggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
     </header>
 
     <main>
@@ -211,7 +212,7 @@
         </section>
     </main>
 
-    <footer class="site-footer">
+    <footer class="site-footer" data-i18n="footer_copyright">
         © 2025 Albert Pingol. All Rights Reserved.
     </footer>
     
@@ -219,4 +220,3 @@
 </body>
 
 </html>
-
