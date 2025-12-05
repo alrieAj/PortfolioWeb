@@ -671,6 +671,7 @@ html {
     background: rgba(255, 255, 255, 0.1);
     overflow: hidden;
     box-shadow: 0 0 50px rgba(12, 255, 41, 0.5);
+    /* DEFAULT DESKTOP ORDER */
     order: 1; 
 }
 
@@ -691,6 +692,7 @@ html {
     justify-content: center;
     flex-grow: 1;
     max-width: 600px;
+    /* DEFAULT DESKTOP ORDER */
     order: 2;
 }
 
@@ -775,133 +777,102 @@ html {
 
 @media (max-width: 768px) {
     
-    /* FIX: Reduce padding on the fixed header for mobile view */
+    /* --- HEADER FIXES --- */
     .nav-header {
         padding: 10px 15px;
     }
-    
-    /* 1. LOGO: First element, pushes others right */
     .nav-header .logo {
         order: 1; 
-        margin-right: auto; /* Push the rest of the elements to the right edge */
+        margin-right: auto; 
     }
-    
-    /* 2. ICON CONTROLS: Second element, grouped with hamburger */
     .icon-controls {
         order: 2; 
         margin-left: 0;
-        margin-right: 15px; /* Space before the hamburger */
+        margin-right: 15px;
         gap: 10px;
         display: flex; 
         align-items: center;
     }
-    
-    /* 3. HAMBURGER MENU: Last element, on the far right edge */
     .menu-toggle {
         display: flex; 
         order: 3; 
         margin-left: 0;
     }
-    
-    /* Increase Icon Touch Targets (Tappability fix) */
-    .icon-button {
-        width: 38px;
-        height: 38px;
-        font-size: 1.4rem; 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 50%;
-        background-color: rgba(255, 255, 255, 0.1);
-    }
-    
-    /* Language Dropdown placement and size */
-    .lang-dropdown-content {
-        min-width: 150px; 
-        right: 0; 
-        left: auto;
-    }
-
-    /* Collapse/Hide the desktop navigation menu */
     .nav-links {
-        position: fixed;
-        top: 0;
-        right: 0;
         height: 100vh;
         width: 300px; 
-        background-color: var(--nav-mobile-bg); 
-        transform: translateX(100%); 
-        z-index: 999; 
-        padding-top: 100px;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    /* When the menu is toggled open by JS */
-    .nav-links.active {
-        transform: translateX(0); 
     }
 
-    /* Adjust the navigation list for vertical stacking */
-    .nav-links ul {
-        flex-direction: column;
-        width: 100%;
-        gap: 30px;
-        margin: 0;
-        padding: 20px 40px;
-    }
-    
-    .nav-links li {
-        width: 100%;
-        border-bottom: 1px solid var(--border-color);
-        padding-bottom: 10px;
-    }
-
-    /* Home Section adjustments */
+    /* --- HOME SECTION --- */
     .home-section {
-        flex-direction: column;
         padding: 100px 15px 40px;
         gap: 20px;
     }
 
-    .image-content {
-        width: 250px; 
-        height: 250px;
-        padding: 0;
-        order: -1; 
-        margin-bottom: 10px;
-        box-shadow: 0 0 10px rgba(12, 255, 41, 0.4);
+    /* --- CONTENT CARD FIXES (Full Width) --- */
+    
+    .about-section {
+        padding: 60px 15px; /* Adjust section padding */
+    }
+    .about-text {
+        /* CRITICAL: Make about text card full width */
+        max-width: none; 
+        width: 100%; 
+        padding: 30px;
+        border-radius: 30px;
+        margin: 0; /* Remove existing auto margins */
     }
     
-    /* Projects Section Adjustments (Fixing Skinniness) */
-    .projects-section {
-        padding: 60px 15px; /* Reduced side padding */
+    .skills-section {
+        padding: 60px 15px;
     }
-    
-    .project-card {
+    .skill-card {
         padding: 25px;
-        /* CRITICAL FIX: Make the card take full width of the container */
+        /* CRITICAL: Make skill card full width */
         flex: 1 1 100%; 
         max-width: none; 
         width: 100%; 
-        margin: 0 5px; /* Small outer margin for screen edge breathing room */
+        margin: 0 5px; 
     }
-
-    /* About, Skills, Contact adjustments remain consistent */
-    .about-image {
-        width: 250px;
-        height: 250px;
+    
+    .projects-section {
+        padding: 60px 15px;
     }
-    .about-text {
-        max-width: 400px; 
-        width: 90%; 
+    .project-card {
+        padding: 25px;
+        /* CRITICAL: Make project card full width */
+        flex: 1 1 100%; 
+        max-width: none; 
+        width: 100%; 
+        margin: 0 5px; 
     }
+    
+    /* --- CONTACT SECTION FIXES (Image at Top) --- */
+    .contact-content-wrapper {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
     .contact-image-wrapper {
+        /* Puts image at the top of the column (above the form) */
+        order: -1; 
         width: 200px;
         height: 200px;
+        box-shadow: 0 0 30px rgba(12, 255, 41, 0.5);
     }
+    
+    .contact-form-container {
+        /* Puts form below the image */
+        order: 1;
+        max-width: none;
+        width: 100%; /* Ensure container is full width */
+    }
+    
     .contact-form {
-        width: 90%;
+        /* CRITICAL: Make contact form full width */
+        padding: 30px;
+        width: 100%;
+        max-width: none; 
     }
 }
 
