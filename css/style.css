@@ -785,13 +785,11 @@ html {
         order: 1; 
         margin-right: auto; 
     }
-    
-    /* CRITICAL FIX: Reduced margin to prevent hamburger clipping on small phones */
     .icon-controls {
         order: 2; 
         margin-left: 0;
-        margin-right: 10px; /* Reduced gap from 15px to 10px */
-        gap: 8px; /* Reduced internal gap from 10px to 8px */
+        margin-right: 15px;
+        gap: 10px;
         display: flex; 
         align-items: center;
     }
@@ -814,15 +812,15 @@ html {
     /* --- CONTENT CARD FIXES (Full Width) --- */
     
     .about-section {
-        padding: 60px 15px;
+        padding: 60px 15px; /* Adjust section padding */
     }
     .about-text {
-        /* Full width for card content */
+        /* CRITICAL: Make about text card full width */
         max-width: none; 
         width: 100%; 
         padding: 30px;
         border-radius: 30px;
-        margin: 0; 
+        margin: 0; /* Remove existing auto margins */
     }
     
     .skills-section {
@@ -830,7 +828,7 @@ html {
     }
     .skill-card {
         padding: 25px;
-        /* Full width for card content */
+        /* CRITICAL: Make skill card full width */
         flex: 1 1 100%; 
         max-width: none; 
         width: 100%; 
@@ -842,14 +840,14 @@ html {
     }
     .project-card {
         padding: 25px;
-        /* Full width for card content */
+        /* CRITICAL: Make project card full width */
         flex: 1 1 100%; 
         max-width: none; 
         width: 100%; 
         margin: 0 5px; 
     }
     
-    /* --- CONTACT SECTION FIXES (Image at Top, Full Width) --- */
+    /* --- CONTACT SECTION FIXES (Image at Top) --- */
     .contact-content-wrapper {
         flex-direction: column;
         gap: 30px;
@@ -871,7 +869,7 @@ html {
     }
     
     .contact-form {
-        /* Full width for form card */
+        /* CRITICAL: Make contact form full width */
         padding: 30px;
         width: 100%;
         max-width: none; 
