@@ -318,6 +318,8 @@ body.dark-mode .nav-header.scrolled {
     font-size: clamp(20px, 4vw, 45px);
     margin-top: 0; 
     display: block; 
+    /* 🔥 ADD THIS LINE FOR DESKTOP CENTERING: */
+    text-align: center; 
 }
 
 .static-h2-text {
@@ -1065,3 +1067,4 @@ html[dir="rtl"] .lang-dropdown-content {
         text-align: center;
     }
 }
+
