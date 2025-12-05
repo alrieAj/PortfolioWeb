@@ -300,7 +300,19 @@ html {
     left: 0;
     width: 100%;
     height: 100%; 
-    object-fit: cover; 
+    obje.bg-video {
+    position: fixed; 
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: 100%;
+    object-fit: contain; /* keeps entire video visible */
+    transform: translate(-50%, -50%);
+    z-index: -2;
+    filter: brightness(0.6);
+    background: black;   /* fills empty space if aspect ratio mismatch */
+}
+ct-fit: cover; 
     z-index: -2;
     filter: brightness(0.6);
 }
@@ -1079,3 +1091,4 @@ body.dark-mode {
         text-align: right;
     }
 }
+
