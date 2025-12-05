@@ -1,229 +1,127 @@
-/*
-|--------------------------------------------------------------------------
-| 1. CSS VARIABLES (Theme Management)
-|--------------------------------------------------------------------------
-*/
+/* ================================================= */
+/* 0. BASE STYLES & GLOBALS */
+/* ================================================= */
 
+/* Define CSS Variables for easy Dark/Light Mode switching */
 :root {
-    /* Colors - Light Mode (Default) */
-    --color-background-primary: #ffffff;
-    --color-background-secondary: #f4f4f9;
-    --color-text-primary: #333333;
-    --color-text-secondary: #555555;
-    --color-accent: #007bff; /* Blue */
-    --color-header-bg: rgba(255, 255, 255, 0.95);
-    --color-border: #dddddd;
-
-    /* Spacing & Typography */
-    --font-family-primary: 'Open Sans', sans-serif;
-    --header-height: 80px;
-    --content-padding: 60px 5%;
+    --text-color: rgb(0, 0, 0);
+    --body-bg: #f0f0f0;
+    --header-bg: transparent;
+    --primary-color: #0cff29;
+    --icon-hover-bg: rgba(0, 0, 0, 0.1);
+    --dropdown-bg: rgba(0, 0, 0, 0.95);
+    --nav-mobile-bg: rgba(0, 0, 0, 0.98);
+    --border-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Dark Mode Overrides */
+/* Dark Mode Variable Overrides */
 body.dark-mode {
-    --color-background-primary: #121212;
-    --color-background-secondary: #1e1e1e;
-    --color-text-primary: #e0e0e0;
-    --color-text-secondary: #aaaaaa;
-    --color-accent: #00aaff; /* Lighter Blue/Cyan */
-    --color-header-bg: rgba(18, 18, 18, 0.95);
-    --color-border: #333333;
+    --text-color: #f0f0f0;
+    --body-bg: #121212;
+    --header-bg: transparent;
+    --icon-hover-bg: rgba(255, 255, 255, 0.1);
 }
 
-/*
-|--------------------------------------------------------------------------
-| 2. BASE & UTILITIES
-|--------------------------------------------------------------------------
-*/
+/* Best practice: Apply box-sizing globally for predictable layouts */
+*, *::before, *::after {
+    box-sizing: border-box; 
+}
 
-* {
+body {
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    color: var(--text-color); 
+    line-height: 1.5;
+    overflow-x: hidden;
+    background-color: var(--body-bg);
+    /* Smooth transition for body colors when switching modes */
+    transition: background-color 0.5s, color 0.5s; 
 }
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 160px;
 }
 
-body {
-    font-family: var(--font-family-primary);
-    background-color: var(--color-background-primary);
-    color: var(--color-text-primary);
-    transition: background-color 0.3s, color 0.3s;
-    line-height: 1.6;
-}
+/* ================================================= */
+/* 1. HEADER & NAVIGATION (DESKTOP) */
+/* ================================================= */
 
-h1, h2, h3 {
-    margin-bottom: 0.5em;
-    color: var(--color-text-primary);
-}
-
-a {
-    color: var(--color-text-primary);
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-a:hover {
-    color: var(--color-accent);
-}
-
-section {
-    padding: var(--content-padding);
-    min-height: 100vh;
-}
-
-/*
-|--------------------------------------------------------------------------
-| 3. VIDEO BACKGROUND
-|--------------------------------------------------------------------------
-*/
-
-.bg-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-    opacity: 0.1; /* Subtly visible */
-}
-
-/*
-|--------------------------------------------------------------------------
-| 4. HEADER & NAVIGATION
-|--------------------------------------------------------------------------
-*/
-
+/* Navbar Styles */
 .nav-header {
     position: fixed;
     top: 0;
-    width: 100%;
-    height: var(--header-height);
+    left: 0;
+    width: 100%; 
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 5%;
-    background: var(--color-header-bg);
+    /* Padding set for desktop */
+    padding: 15px 100px; 
     z-index: 1000;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    background-color: transparent;
+    box-shadow: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Scrolled Header Effect (Added by JS) */
+/* CSS for when header is scrolled (added via JavaScript) */
 .nav-header.scrolled {
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-body.dark-mode .nav-header.scrolled {
-    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
+    background-color: rgba(0, 0, 0, 0.95); 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
-.logo img {
-    height: 40px; /* Adjust logo size */
-}
-
-.nav-links ul {
-    list-style: none;
-    display: flex;
-}
-
-.nav-links li {
-    margin: 0 15px;
-}
-
-.nav-links a {
-    font-weight: 600;
-    padding: 5px 0;
-    position: relative;
-    letter-spacing: 0.5px;
-}
-
-/* Scroll Spy & Click Active Link Style */
-.nav-links a.active {
-    color: var(--color-accent); 
-}
-
-.nav-links a:hover::after,
-.nav-links a.active::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--color-accent);
-    transform: scaleX(1);
-}
-
-/*
-|--------------------------------------------------------------------------
-| 5. CONTROLS (Dark Mode & Language)
-|--------------------------------------------------------------------------
-*/
-
-.icon-controls {
+/* Logo Styles */
+.nav-header .logo {
     display: flex;
     align-items: center;
+    background-color: #fefffe;
+    border-radius: 50%;
 }
 
-.icon-button {
-    background: none;
-    border: none;
-    color: var(--color-text-primary);
-    font-size: 1.2rem;
-    cursor: pointer;
-    margin-left: 15px;
-    padding: 8px;
-    transition: color 0.2s, transform 0.2s;
+.nav-header .logo img {
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+    transition: transform 0.3s;
 }
 
-.icon-button:hover {
-    color: var(--color-accent);
+.nav-header .logo img:hover {
     transform: scale(1.1);
 }
 
-/* Language Dropdown */
-.lang-dropdown-container {
-    position: relative;
-    display: inline-block;
+/* Navigation Links Container (Desktop) */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem; 
+    margin-left: auto; 
+    transition: transform 0.3s ease-in-out; 
 }
 
-.lang-dropdown-content {
-    display: none;
-    position: absolute;
-    top: 100%;
-    /* Align dropdown to the right by default (LTR) */
-    right: 0; 
-    background-color: var(--color-background-primary);
-    min-width: 120px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    border: 1px solid var(--color-border);
-    border-radius: 5px;
-    margin-top: 5px;
+/* Links list */
+.nav-links ul {
+    list-style: none;
+    display: flex;
+    gap: 50px; 
+    margin: 10px 70px;
+    padding: 0; 
 }
 
-.lang-dropdown-container.active .lang-dropdown-content {
-    display: block;
-}
-
-.lang-option {
-    color: var(--color-text-primary);
-    padding: 8px 12px;
+/* Links */
+.nav-links a {
     text-decoration: none;
-    display: block;
-    cursor: pointer;
-    font-size: 0.9rem;
+    color: white; 
+    font-size: 20px;
+    transition: color 0.3s ease;
 }
 
-.lang-option:hover {
-    background-color: var(--color-background-secondary);
-    color: var(--color-accent);
+.nav-links a:hover,
+.nav-links a.active { /* 'active' class used by JS */
+    color: var(--primary-color);
 }
 
-/* Hamburger Menu (Mobile Only) */
+/* --- Hamburger Menu Styles --- */
+
 .menu-toggle {
     display: none; /* Hidden by default on desktop */
     flex-direction: column;
@@ -231,275 +129,828 @@ body.dark-mode .nav-header.scrolled {
     width: 30px;
     height: 25px;
     cursor: pointer;
-    padding: 0;
+    z-index: 1100; /* Ensure it is above the menu links */
 }
 
 .menu-toggle .bar {
     width: 100%;
     height: 3px;
-    background-color: var(--color-text-primary);
-    transition: all 0.3s linear;
+    background-color: white;
+    transition: all 0.3s ease;
+    border-radius: 5px;
 }
 
-/* Animation for the Hamburger icon */
+/* Hamburger transition to X */
 .menu-toggle.active .bar:nth-child(2) {
-    opacity: 0;
+    opacity: 0; /* Hide middle bar */
 }
+
 .menu-toggle.active .bar:nth-child(1) {
     transform: translateY(11px) rotate(45deg);
 }
+
 .menu-toggle.active .bar:nth-child(3) {
     transform: translateY(-11px) rotate(-45deg);
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| 6. SECTION STYLING (Home, About, Projects, Contact)
-|--------------------------------------------------------------------------
-*/
+/* --- ICON CONTROLS AND DROPDOWN STYLES --- */
 
-/* General Section Layouts (Flexbox example) */
-.home-section, .about-container {
+.icon-controls {
     display: flex;
     align-items: center;
-    gap: 40px;
-    padding-top: calc(var(--header-height) + 40px);
+    gap: 15px;
+    margin-left: 20px; /* Spacing from main nav */
 }
 
-.home-section .text-content,
-.home-section .image-content {
-    flex: 1;
-    min-width: 300px;
+.icon-button {
+    background: none;
+    border: none;
+    color: white; 
+    cursor: pointer;
+    font-size: 1.6rem; 
+    padding: 5px;
+    transition: color 0.3s ease, transform 0.2s;
+    line-height: 1;
 }
 
-.home-section .image-content img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+.icon-button:hover {
+    color: var(--primary-color); 
+    transform: scale(1.1);
 }
 
-/* Skills and Projects Grid */
-.skills-container, .projects-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
+/* Language Dropdown Container */
+.lang-dropdown-container {
+    position: relative;
+    display: inline-block; /* Essential for dropdown positioning */
+    z-index: 1050; /* Ensure it stays above other elements */
 }
 
-.skill-card, .project-card {
-    background-color: var(--color-background-secondary);
+/* Language Dropdown Menu Content */
+.lang-dropdown-content {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%; /* Position below the icon */
+    right: 0;
+    background-color: var(--dropdown-bg);
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
     border-radius: 8px;
-    padding: 25px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    border-left: 5px solid var(--color-accent);
+    padding: 10px 0;
+    margin-top: 10px;
+    border-top: 3px solid var(--primary-color);
+}
+
+/* Show the dropdown when the container has the 'active' class (set by JS) */
+.lang-dropdown-container.active .lang-dropdown-content {
+    display: block;
+}
+
+.lang-option {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.lang-option:hover {
+    background-color: rgba(12, 255, 41, 0.2);
+    color: var(--primary-color);
+}
+
+
+/* ================================================= */
+/* 2. HOME SECTION & VIDEO */
+/* ================================================= */
+
+/* --- TEXT ANIMATION STYLES --- */
+
+/* Keyframes for the transition effect (2 seconds visible, 1 second out/in) */
+@keyframes text-reveal {
+    0% {
+        transform: translateY(100%); 
+        opacity: 0;
+    }
+    10% {
+        transform: translateY(0);
+        opacity: 1; 
+    }
+    33.33% { 
+        transform: translateY(0);
+        opacity: 1; 
+    }
+    43.33% { 
+        transform: translateY(-100%); 
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+
+/* 🛑 FIX: This container controls the visible window for the animating text */
+.changing-text {
+    display: inline-block;  
+    position: relative; 
+    overflow: hidden;
+    color: var(--primary-color);
+    
+    /* Key Fixes for preventing clipping: */
+    height: 1.2em; /* Must be the height of one line */
+    line-height: 1.2; 
+    min-width: 250px; /* GUARANTEES "Developer" fits */
+    
+    vertical-align: top; /* Keeps it aligned with the static text */
+}
+
+/* Apply animation to all individual words */
+.changing-text-word {
+    display: block;
+    /* Animation time is 6s to cycle through 3 words (2s per word * 3) */
+    animation: text-reveal 6s infinite;  
+    position: absolute; 
+    top: 0;
+    left: 0;
+    /* Start all words off-screen below the container */
+    transform: translateY(100%); 
+    opacity: 0;
+}
+
+/* Stagger the start time of the 2nd and 3rd words */
+.changing-text-word.word-2 {
+    animation-delay: -2s; /* Starts 2 seconds (1/3 cycle) into the 6s loop */
+}
+.changing-text-word.word-3 {
+    animation-delay: -4s; /* Starts 4 seconds (2/3 cycle) into the 6s loop */
+}
+
+
+/* --- Video Background --- */
+.bg-video {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; 
+    object-fit: cover; 
+    z-index: -2;
+    filter: brightness(0.6);
+}
+
+/* Home Section */
+.home-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+    padding: 100px 15px 40px 15px; 
+    background: transparent; 
+    gap: 100px; 
+}
+
+.text-content {
+    color: white;  
+    flex-shrink: 0;
+    max-width: 650px; 
+}
+
+/* FIX 1: Make H1 stay on one line */
+.text-content h1 {
+    font-size: clamp(40px, 8vw, 100px);
+    white-space: nowrap; /* Forces H1 to stay on a single line */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 5px; 
+}
+
+/* FIX 2: H2 is the container for the 2nd and 3rd lines */
+.text-content h2 {
+    font-size: clamp(20px, 4vw, 45px);
+    margin-top: 0; 
+    display: block; /* Ensures h2 behaves like a block element */
+}
+
+/* New element for "Full Stack Software" - Force it to its own line */
+.static-h2-text {
+    display: block; /* Forces this span to take up a full line inside H2 */
+    margin-bottom: 10px; /* Adds space above the animated text */
+}
+
+/* Style for intro paragraph to control width without <br> */
+.text-content .intro-paragraph {
+    max-width: 500px; 
+}
+
+.text-content p {
+    font-size: 20px;
+    margin-top: 20px;
+    color: #ffffff;
+}
+
+/* Right Side Image Wrapper */
+.image-content {
+    padding: 20px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 420px;
+    height: 420px;
+    flex-shrink: 0; 
+    box-shadow: 0 0 15px rgba(12, 255, 41, 0.4); 
+    border-radius: 50%;
+    transition: box-shadow 0.4s ease-in-out;
+}
+
+.image-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); 
+    transition: box-shadow 0.4s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* 🌟 Hover Effect for a Magical Glow */
+.image-content:hover {
+    box-shadow: 0 0 40px rgba(12, 255, 41, 0.8), 
+                0 0 80px rgba(12, 255, 41, 0.6); 
+}
+
+.image-content img:hover {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 
+                0 0 40px rgba(255, 255, 255, 0.6); 
+    transform: scale(1.02);
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-links img {
+    width: 40px; 
+    height: 40px;
+    transition: transform 0.3s ease;
+    border-radius: 5%; 
+}
+
+.social-links img:hover {
+    transform: scale(1.2); 
+}
+
+
+/* ================================================= */
+/* 3. SECTION STYLING (About, Skills, Projects, Contact) */
+/* ================================================= */
+
+/* About Section */
+.about-section {
+    display: flex;
+    background: transparent;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px; 
+    color: white; 
+    text-align: center;
+}
+
+/* About Container */
+.about-container {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 50px;
+    max-width: 1100px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0; 
+    margin-right: 0;
+}
+
+.about-image img {
+    width: 100%;
+    max-width: 300px;
+    height: auto; 
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #09ff00;
+    box-shadow: 0px 4px 50px rgba(0,0,0,0.2);
+}
+
+
+.about-text {
+    max-width: 600px;
+    text-align: justify; 
+    
+    background: rgba(255, 255, 255, 0.9); 
+    padding: 50px; 
+    border-radius: 50px; 
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.about-text .about-title {
+    font-size: clamp(2.2rem, 5vw, 2.5rem);
+    margin-bottom: 20px;
+    color: #000000; 
+    text-align: center;
+}
+
+.about-text p {
+    font-size: clamp(1.1rem, 2.5vw, 1.2rem);
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #000000; 
+}
+
+/* --- SKILLS/TOOLS SECTION STYLES --- */
+
+.skills-section {
+    padding: 80px 80px;
+    text-align: center;
+    color: #ffffff; 
+    background: transparent;
+}
+
+.skills-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+}
+
+.skills-container {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.skill-card {
+    /* Set a consistent light background */
+    background: rgba(255, 255, 255, 0.95); 
+    border-radius: 20px;
+    color: #000000;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     transition: transform 0.3s, box-shadow 0.3s;
+    /* Adjusted flex basis to encourage three cards per row */
+    flex: 1 1 300px; 
+    max-width: 350px;
+    text-align: center;
 }
 
-.skill-card:hover, .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-body.dark-mode .skill-card:hover, body.dark-mode .project-card:hover {
-    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
+.skill-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(12, 255, 41, 0.5); /* Subtle green hover glow */
 }
 
-.project-btn {
-    display: inline-block;
-    padding: 8px 15px;
+.skill-card h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color); /* Green highlight for title */
+    margin-bottom: 15px;
+}
+
+.skill-card p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 25px;
+    min-height: 40px; /* Ensures consistent card height */
+}
+
+.icon-list {
+    display: flex;
+    /* Centered and flexible icon list */
+    justify-content: center;
+    gap: 15px; /* Slightly reduced gap for more icons */
     margin-top: 15px;
-    background-color: var(--color-accent);
-    color: var(--color-background-primary);
-    border-radius: 4px;
-    text-transform: uppercase;
-    font-size: 0.9rem;
+    flex-wrap: wrap; /* Important for multiple rows of icons */
 }
 
-/* Contact Form */
-.contact-content-wrapper {
+.icon-list img {
+    width: 50px; /* Slightly increased size for better visibility */
+    height: 50px;
+    object-fit: contain;
+    transition: transform 0.3s;
+}
+
+.icon-list img:hover {
+    transform: scale(1.15);
+}
+
+
+/* Projects Section */
+.projects-section {
+    padding: 80px 80px;
+    text-align: center;
+    color: #ffffff; 
+}
+
+.projects-section h2 { 
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.projects-container {
     display: flex;
     gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.project-card {
+    background: #fff;
+    border-radius: 20px;
+    color: #000000;
+    padding: 30px; 
+    box-shadow: 0 8px 40px rgba(0,0,0,0.15); 
+    transition: transform 0.3s;
+    
+    flex: 1 1 300px; 
+    max-width: 400px;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+
+}
+
+.project-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+.project-card h3 {
+    font-size: 1.5rem; 
+    margin-bottom: 12px;
+}
+
+.project-card p {
+    font-size: 1.1rem; 
+}
+
+/* --- Project Button Styles --- */
+
+.project-btn {
+    display: inline-block; 
+    margin-top: 15px; 
+    padding: 10px 20px;
+    
+    background-color: var(--primary-color); 
+    color: #000000; 
+    
+    text-decoration: none; 
+    font-weight: bold;
+    font-size: 1rem;
+    
+    border-radius: 8px;
+    border: 2px solid var(--primary-color); 
+    
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.project-btn:hover {
+    background-color: #00e620; 
+    box-shadow: 0 4px 15px rgba(12, 255, 41, 0.6); 
+    transform: translateY(-2px); 
+}
+
+.project-card p {
+    margin-bottom: 20px; 
+}
+
+
+/* Contact Section */
+.contact-section {
+    padding: 80px 40px;
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.contact-section h2 {
+    font-size: 3.5rem;
+    margin-bottom: 25px; 
+}
+
+.contact-intro {
+    font-size: 1.5rem; 
+    margin-bottom: 0;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 700px;
+}
+
+.contact-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    max-width: 1200px;
+    width: 100%;
     margin-top: 30px;
-    align-items: stretch;
 }
 
 .contact-image-wrapper {
-    flex: 1;
+    flex-shrink: 0;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    box-shadow: 0 0 50px rgba(12, 255, 41, 0.5);
+    order: 1; 
 }
 
 .contact-image-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.contact-image-wrapper img:hover {
+    transform: scale(1.05);
 }
 
 .contact-form-container {
-    flex: 1;
-    padding: 20px;
-    background-color: var(--color-background-secondary);
-    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    max-width: 600px;
+    order: 2;
+}
+
+.contact-form {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+    text-align: left;
 }
 
 .form-group {
     margin-bottom: 20px;
 }
 
-.form-group label {
+.contact-form label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: 600;
+    font-size: 1rem;
+    color: #000000;
+    margin-bottom: 8px;
+    font-weight: bold;
 }
 
-.form-group input, .form-group textarea {
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
     width: 100%;
-    padding: 10px;
-    border: 1px solid var(--color-border);
-    border-radius: 4px;
-    background-color: var(--color-background-primary);
-    color: var(--color-text-primary);
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px rgba(12, 255, 41, 0.5);
+    outline: none;
+}
+
+.contact-form textarea {
+    resize: vertical;
 }
 
 .submit-btn {
-    background-color: var(--color-accent);
-    color: var(--color-background-primary);
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: #000000;
+    font-size: 1.1rem;
+    font-weight: bold;
     border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.1s;
+    margin-top: 10px;
 }
 
 .submit-btn:hover {
-    background-color: #0056b3; /* Darker shade of accent */
+    background-color: #00e620;
+    transform: translateY(-2px);
+}
+
+.site-footer {
+    padding: 20px 0;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| 7. RTL (Right-to-Left) Adjustments (For Arabic)
-|--------------------------------------------------------------------------
-*/
-
-html[dir='rtl'] body {
-    text-align: right;
-}
-
-/* Reverse Navigation Layout for RTL */
-html[dir='rtl'] .nav-header {
-    flex-direction: row-reverse;
-}
-
-html[dir='rtl'] .nav-links ul {
-    flex-direction: row-reverse;
-}
-
-/* Reverse Main Content Layouts for RTL */
-html[dir='rtl'] .home-section {
-    flex-direction: row-reverse;
-}
-html[dir='rtl'] .about-container {
-    flex-direction: row-reverse;
-}
-html[dir='rtl'] .contact-content-wrapper {
-    flex-direction: row-reverse;
-}
-
-/* Adjust Spacing/Alignment for RTL */
-html[dir='rtl'] .nav-links li {
-    margin: 0 0 0 15px; /* Adjust spacing to the left of the link */
-}
-
-html[dir='rtl'] .icon-button {
-    margin-right: 15px; /* Adjust margin on icon controls */
-    margin-left: 0;
-}
-
-/* Adjust Dropdown Alignment for RTL */
-html[dir='rtl'] .lang-dropdown-content {
-    left: 0; /* Align dropdown to the left edge of the button */
-    right: auto;
-}
-
-/* Flip Card Border Direction */
-html[dir='rtl'] .skill-card, html[dir='rtl'] .project-card {
-    border-left: none;
-    border-right: 5px solid var(--color-accent);
-}
-
-/* Flip Form Label Alignment */
-html[dir='rtl'] .form-group label {
-    text-align: right;
-}
-
-/*
-|--------------------------------------------------------------------------
-| 8. MEDIA QUERIES (Mobile Responsiveness)
-|--------------------------------------------------------------------------
-*/
-
-@media (max-width: 1024px) {
-    /* For Tablets/Laptops */
-    .home-section {
-        flex-direction: column;
-        text-align: center;
-    }
-    .home-section .image-content {
-        order: -1; /* Move image to the top */
-    }
-    .about-container {
-        flex-direction: column;
-        text-align: center;
-    }
-    .contact-content-wrapper {
-        flex-direction: column;
-    }
-}
-
+/* ================================================= */
+/* 4. MEDIA QUERY FOR MOBILE (768px and below) */
+/* ================================================= */
 
 @media (max-width: 768px) {
-    /* For Mobile Devices */
+    
+    /* FIX: Reduce padding on the fixed header for mobile view */
     .nav-header {
-        height: 60px;
+        padding: 10px 15px;
     }
-    section {
-        padding: 40px 5%;
+    
+    /* 1. LOGO: First element, pushes others right */
+    .nav-header .logo {
+        order: 1; 
+        margin-right: auto; /* Push the rest of the elements to the right edge */
+    }
+    
+    /* 2. ICON CONTROLS: Second element, grouped with hamburger */
+    .icon-controls {
+        order: 2; 
+        margin-left: 0;
+        margin-right: 15px; /* Space before the hamburger */
+        gap: 10px;
+        display: flex; 
+        align-items: center;
+    }
+    
+    /* 3. HAMBURGER MENU: Last element, on the far right edge */
+    .menu-toggle {
+        display: flex; 
+        order: 3; 
+        margin-left: 0;
+    }
+    
+    /* Increase Icon Touch Targets (Tappability fix) */
+    .icon-button {
+        width: 38px;
+        height: 38px;
+        font-size: 1.4rem; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Language Dropdown placement and size */
+    .lang-dropdown-content {
+        min-width: 150px; 
+        right: 0; 
+        left: auto;
     }
 
-    /* Hide desktop navigation and show toggle */
+    /* Collapse/Hide the desktop navigation menu */
     .nav-links {
-        position: absolute;
-        top: 60px; /* Below the header */
-        left: 0;
-        width: 100%;
-        background: var(--color-background-primary);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        display: none; /* Hidden by default */
-        text-align: center;
-        padding: 10px 0;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 300px; 
+        background-color: var(--nav-mobile-bg); 
+        transform: translateX(100%); 
+        z-index: 999; 
+        padding-top: 100px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    /* When the menu is toggled open by JS */
+    .nav-links.active {
+        transform: translateX(0); 
     }
 
+    /* Adjust the navigation list for vertical stacking */
     .nav-links ul {
         flex-direction: column;
+        width: 100%;
+        gap: 30px;
+        margin: 0;
+        padding: 20px 40px;
     }
-
+    
     .nav-links li {
-        margin: 10px 0;
+        width: 100%;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 10px;
     }
 
-    /* Show Mobile Menu when JS adds 'active' class */
-    .nav-links.active {
-        display: flex;
+    /* Home Section adjustments */
+    .home-section {
+        flex-direction: column;
+        padding: 100px 15px 40px;
+        gap: 20px;
     }
 
-    .menu-toggle {
-        display: flex;
+    .image-content {
+        width: 250px; 
+        height: 250px;
+        padding: 0;
+        order: -1; 
+        margin-bottom: 10px;
+        box-shadow: 0 0 10px rgba(12, 255, 41, 0.4);
+    }
+    
+    /* Projects Section Adjustments (Fixing Skinniness) */
+    .projects-section {
+        padding: 60px 15px; /* Reduced side padding */
+    }
+    
+    .project-card {
+        padding: 25px;
+        /* CRITICAL FIX: Make the card take full width of the container */
+        flex: 1 1 100%; 
+        max-width: none; 
+        width: 100%; 
+        margin: 0 5px; /* Small outer margin for screen edge breathing room */
     }
 
-    /* RTL Menu Fix for Mobile */
-    html[dir='rtl'] .nav-links {
-        left: 0;
+    /* About, Skills, Contact adjustments remain consistent */
+    .about-image {
+        width: 250px;
+        height: 250px;
     }
+    .about-text {
+        max-width: 400px; 
+        width: 90%; 
+    }
+    .contact-image-wrapper {
+        width: 200px;
+        height: 200px;
+    }
+    .contact-form {
+        width: 90%;
+    }
+}
+
+
+/* ================================================= */
+/* 5. DARK MODE STYLES */
+/* ================================================= */
+
+body.dark-mode {
+    background-color: var(--body-bg); 
+    color: var(--text-color); 
+}
+
+.dark-mode .icon-button {
+    color: #fce38a;
+}
+.dark-mode .lang-dropdown-content {
+    background-color: #1e1e1e;
+}
+.dark-mode .lang-option {
+    color: var(--text-color);
+}
+
+.dark-mode .about-text,
+.dark-mode .skill-card,
+.dark-mode .project-card,
+.dark-mode .contact-form {
+    background: #1e1e1e; 
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    color: var(--text-color); 
+    transition: background-color 0.5s, box-shadow 0.5s; 
+}
+
+.dark-mode .about-text .about-title,
+.dark-mode .skill-card h3,
+.dark-mode .project-card h3 {
+    color: var(--primary-color); 
+}
+
+.dark-mode .contact-form input,
+.dark-mode .contact-form textarea {
+    background-color: #2c2c2c;
+    border-color: #555;
+    color: var(--text-color);
+}
+
+.dark-mode p {
+    color: var(--text-color);
+}
+.dark-mode .skill-card p {
+    color: #ccc;
 }
