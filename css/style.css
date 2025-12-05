@@ -2,6 +2,26 @@
 /* 0. BASE STYLES & GLOBALS */
 /* ================================================= */
 
+/* Define CSS Variables for easy Dark/Light Mode switching */
+:root {
+    --text-color: rgb(0, 0, 0);
+    --body-bg: #f0f0f0;
+    --header-bg: transparent;
+    --primary-color: #0cff29;
+    --icon-hover-bg: rgba(0, 0, 0, 0.1);
+    --dropdown-bg: rgba(0, 0, 0, 0.95);
+    --nav-mobile-bg: rgba(0, 0, 0, 0.98);
+    --border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark Mode Variable Overrides */
+body.dark-mode {
+    --text-color: #f0f0f0;
+    --body-bg: #121212;
+    --header-bg: transparent;
+    --icon-hover-bg: rgba(255, 255, 255, 0.1);
+}
+
 /* Best practice: Apply box-sizing globally for predictable layouts */
 *, *::before, *::after {
     box-sizing: border-box; 
@@ -10,9 +30,10 @@
 body {
     margin: 0;
     font-family: 'Open Sans', sans-serif;
-    color: rgb(0, 0, 0); 
+    color: var(--text-color); 
     line-height: 1.5;
     overflow-x: hidden;
+    background-color: var(--body-bg);
     /* Smooth transition for body colors when switching modes */
     transition: background-color 0.5s, color 0.5s; 
 }
@@ -35,7 +56,8 @@ html {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 100px 10px 100px;
+    /* Reduced vertical padding from 10px to 15px for better spacing */
+    padding: 15px 100px; 
     z-index: 1000;
     background-color: transparent;
     box-shadow: none;
@@ -72,6 +94,8 @@ html {
     display: flex;
     align-items: center;
     gap: 2rem; 
+    /* Desktop links are centered by default, but we'll use margin-left: auto 
+       in a combined block with icons to push them right if needed. */
     margin-left: auto; 
     transition: transform 0.3s ease-in-out; 
 }
@@ -81,7 +105,7 @@ html {
     list-style: none;
     display: flex;
     gap: 50px; 
-    margin: 10px 70px ;
+    margin: 10px 70px;
     padding: 0; 
 }
 
@@ -95,7 +119,7 @@ html {
 
 .nav-links a:hover,
 .nav-links a.active { /* 'active' class used by JS */
-    color: #0cff29;
+    color: var(--primary-color);
 }
 
 /* --- Hamburger Menu Styles --- */
@@ -153,7 +177,7 @@ html {
 }
 
 .icon-button:hover {
-    color: #0cff29; 
+    color: var(--primary-color); 
     transform: scale(1.1);
 }
 
@@ -170,13 +194,13 @@ html {
     position: absolute;
     top: 100%; /* Position below the icon */
     right: 0;
-    background-color: rgba(0, 0, 0, 0.95);
+    background-color: var(--dropdown-bg);
     min-width: 180px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
     border-radius: 8px;
     padding: 10px 0;
     margin-top: 10px;
-    border-top: 3px solid #0cff29;
+    border-top: 3px solid var(--primary-color);
 }
 
 /* Show the dropdown when the container has the 'active' class (set by JS) */
@@ -196,7 +220,7 @@ html {
 
 .lang-option:hover {
     background-color: rgba(12, 255, 41, 0.2);
-    color: #0cff29;
+    color: var(--primary-color);
 }
 
 
@@ -204,28 +228,28 @@ html {
 /* 2. HOME SECTION & VIDEO */
 /* ================================================= */
 
-/* --- TEXT ANIMATION STYLES (ENHANCED FOR STAGGERED CSS) --- */
+/* --- TEXT ANIMATION STYLES --- */
 
 /* Keyframes for the transition effect (2 seconds visible, 1 second out/in) */
 @keyframes text-reveal {
     0% {
-        transform: translateY(100%); /* Starts below visibility */
+        transform: translateY(100%); 
         opacity: 0;
     }
     10% {
         transform: translateY(0);
-        opacity: 1; /* Quick fade in */
+        opacity: 1; 
     }
-    33.33% { /* Hold for 2 seconds (1/3 of the 6s cycle) */
+    33.33% { 
         transform: translateY(0);
         opacity: 1; 
     }
-    43.33% { /* Start exit */
+    43.33% { 
         transform: translateY(-100%); 
         opacity: 0;
     }
     100% {
-        transform: translateY(-100%); /* Stays hidden until loop restarts */
+        transform: translateY(-100%);
         opacity: 0;
     }
 }
@@ -236,7 +260,7 @@ html {
     display: inline-block;  
     position: relative; 
     overflow: hidden;
-    color: #0cff29; /* Highlight color */
+    color: var(--primary-color);
     
     /* Key Fixes for preventing clipping: */
     height: 1.2em; /* Must be the height of one line */
@@ -251,7 +275,7 @@ html {
     display: block;
     /* Animation time is 6s to cycle through 3 words (2s per word * 3) */
     animation: text-reveal 6s infinite;  
-    position: absolute; /* Allows for the vertical animation stacking */
+    position: absolute; 
     top: 0;
     left: 0;
     /* Start all words off-screen below the container */
@@ -335,17 +359,16 @@ html {
 
 /* Right Side Image Wrapper */
 .image-content {
-    padding: 20px; /* Keep padding for the shadow space */
+    padding: 20px; 
     display: flex;
     justify-content: center;
     align-items: center;
     width: 420px;
     height: 420px;
     flex-shrink: 0; 
-    /* Add this if you want the *container* to have a subtle initial glow */
     box-shadow: 0 0 15px rgba(12, 255, 41, 0.4); 
-    border-radius: 50%; /* Ensure the container is also round for a consistent shadow */
-    transition: box-shadow 0.4s ease-in-out; /* Smooth transition for the glow */
+    border-radius: 50%;
+    transition: box-shadow 0.4s ease-in-out;
 }
 
 .image-content img {
@@ -353,23 +376,20 @@ html {
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    /* Initial subtle glow around the image itself */
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); 
-    transition: box-shadow 0.4s ease-in-out, transform 0.3s ease-in-out; /* Smooth transition */
+    transition: box-shadow 0.4s ease-in-out, transform 0.3s ease-in-out;
 }
 
 /* 🌟 Hover Effect for a Magical Glow */
 .image-content:hover {
-    /* Larger, brighter glow for the container */
     box-shadow: 0 0 40px rgba(12, 255, 41, 0.8), 
                 0 0 80px rgba(12, 255, 41, 0.6); 
 }
 
 .image-content img:hover {
-    /* Larger, brighter glow for the image */
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 
                 0 0 40px rgba(255, 255, 255, 0.6); 
-    transform: scale(1.02); /* Optional: Slightly enlarge the image */
+    transform: scale(1.02);
 }
 
 /* Social Links */
@@ -458,7 +478,7 @@ html {
 .skills-section {
     padding: 80px 80px;
     text-align: center;
-    color: #ffffff; /* White text on dark video background */
+    color: #ffffff; 
     background: transparent;
 }
 
@@ -495,7 +515,7 @@ html {
 
 .skill-card h3 {
     font-size: 1.5rem;
-    color: #0cff29; /* Green highlight for title */
+    color: var(--primary-color); /* Green highlight for title */
     margin-bottom: 15px;
 }
 
@@ -580,34 +600,31 @@ html {
 /* --- Project Button Styles --- */
 
 .project-btn {
-    display: inline-block; /* Allows padding and width/height to be set */
-    margin-top: 15px; /* Spacing above the button */
+    display: inline-block; 
+    margin-top: 15px; 
     padding: 10px 20px;
     
-    /* Colors based on your green theme */
-    background-color: #0cff29; 
-    color: #000000; /* Black text on green background */
+    background-color: var(--primary-color); 
+    color: #000000; 
     
-    text-decoration: none; /* Remove underline */
+    text-decoration: none; 
     font-weight: bold;
     font-size: 1rem;
     
     border-radius: 8px;
-    border: 2px solid #0cff29; /* Solid border to emphasize shape */
+    border: 2px solid var(--primary-color); 
     
     transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .project-btn:hover {
-    background-color: #00e620; /* Slightly darker green on hover */
-    /* Add a subtle shadow for depth and engagement */
+    background-color: #00e620; 
     box-shadow: 0 4px 15px rgba(12, 255, 41, 0.6); 
-    transform: translateY(-2px); /* Lift the button slightly */
+    transform: translateY(-2px); 
 }
 
-/* Optional: Adjust project card spacing if needed after adding the button */
 .project-card p {
-    margin-bottom: 20px; /* Ensure paragraph spacing before the button */
+    margin-bottom: 20px; 
 }
 
 
@@ -622,7 +639,6 @@ html {
     gap: 40px;
 }
 
-/* NEW: Font size for "Get in Touch" heading */
 .contact-section h2 {
     font-size: 3.5rem;
     margin-bottom: 25px; 
@@ -717,7 +733,7 @@ html {
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-    border-color: #0cff29;
+    border-color: var(--primary-color);
     box-shadow: 0 0 8px rgba(12, 255, 41, 0.5);
     outline: none;
 }
@@ -730,7 +746,7 @@ html {
     display: block;
     width: 100%;
     padding: 15px;
-    background-color: #0cff29;
+    background-color: var(--primary-color);
     color: #000000;
     font-size: 1.1rem;
     font-weight: bold;
@@ -763,20 +779,21 @@ html {
     
     /* FIX: Reduce padding on the fixed header for mobile view */
     .nav-header {
-        padding: 10px 15px 10px 15px; 
+        padding: 10px 15px; /* Reduced padding */
     }
     
     /* 🍔 HAMBURGER MENU FIX: Must be 'flex' to show up on mobile */
     .menu-toggle {
         display: flex; 
-        margin-left: auto; /* Push it to the right */
-        order: 2; /* Position after icons in the header row */
+        margin-left: auto; /* Pushes it away from the icons */
+        order: 3; /* Position last in the header row: Logo | Icons | Hamburger */
     }
 
-    /* FIX: ICON CONTROLS (Day/Night & Language) - Make them tappable */
+    /* FIX: ICON CONTROLS (Day/Night & Language) - Re-order and size for mobile */
     .icon-controls {
-        order: 1; /* Position immediately after the logo */
+        order: 2; /* Position after the logo, before the hamburger */
         margin-left: 10px;
+        margin-right: 15px; /* Space before the hamburger */
         gap: 10px;
     }
     
@@ -784,7 +801,7 @@ html {
         /* Set a definitive touch target size */
         width: 38px;
         height: 38px;
-        font-size: 1.4rem; /* Larger icon size for readability */
+        font-size: 1.4rem; 
         display: flex;
         justify-content: center;
         align-items: center;
@@ -794,9 +811,9 @@ html {
     
     /* FIX: Language Dropdown placement and size */
     .lang-dropdown-content {
-        min-width: 150px; /* Reduced width for smaller screen */
+        min-width: 150px; 
         right: 0; /* Ensures it aligns to the right of the icon */
-        left: auto; /* Overrides any left alignment */
+        left: auto;
     }
 
     /* Collapse/Hide the desktop navigation menu */
@@ -806,7 +823,7 @@ html {
         right: 0;
         height: 100vh;
         width: 300px; 
-        background-color: rgba(0, 0, 0, 0.98); 
+        background-color: var(--nav-mobile-bg); 
         transform: translateX(100%); /* Start off-screen */
         z-index: 999; 
         padding-top: 100px;
@@ -830,7 +847,7 @@ html {
     
     .nav-links li {
         width: 100%;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid var(--border-color);
         padding-bottom: 10px;
     }
 
@@ -842,7 +859,6 @@ html {
     }
 
     .image-content {
-        /* Adjusted width and height for a slightly larger mobile profile picture */
         width: 250px; 
         height: 250px;
         padding: 0;
@@ -881,7 +897,6 @@ html {
         gap: 30px;
     }
     .about-image {
-        /* Adjusted width and height for About section image */
         width: 250px;
         height: 250px;
         padding: 0;
@@ -892,22 +907,20 @@ html {
         height: 100%;
     }
     .about-text {
-        /* Contained width for clean text presentation */
         max-width: 400px; 
-        width: 90%; /* Responsive up to the max-width */
+        width: 90%; 
         padding: 30px;
         border-radius: 30px;
-        text-align: left; /* Use left or center, avoid justify on very small screens */
+        text-align: left; 
         margin: 0 auto;
     }
     .about-text p {
-        /* Ensure mobile text is readable */
         font-size: 1rem; 
     }
     
     /* Skills section adjustments for mobile layout */
     .skills-section {
-        padding: 60px 15px; /* Adjusted padding */
+        padding: 60px 15px; 
     }
     .skills-section h2 {
         font-size: 2rem;
@@ -915,7 +928,7 @@ html {
     }
     .skill-card {
         padding: 25px;
-        flex: 1 1 100%; /* Allows cards to take up full width (with padding) on small screens */
+        flex: 1 1 100%; 
         max-width: none;
     }
     .icon-list {
@@ -932,7 +945,7 @@ html {
         gap: 30px;
     }
     .contact-image-wrapper {
-        order: -1; /* Move image to the top */
+        order: -1; 
         width: 200px;
         height: 200px;
         box-shadow: 0 0 30px rgba(12, 255, 41, 0.5);
@@ -953,8 +966,8 @@ html {
 
 /* Apply dark background and light text to the entire body */
 body.dark-mode {
-    color: #f0f0f0; /* Light gray text */
-    background-color: #121212; /* Very dark background */
+    background-color: var(--body-bg); 
+    color: var(--text-color); 
 }
 
 /* Change icon color for dark mode (e.g., if you want a subtle sun icon instead of moon) */
@@ -965,7 +978,7 @@ body.dark-mode {
     background-color: #1e1e1e;
 }
 .dark-mode .lang-option {
-    color: #f0f0f0;
+    color: var(--text-color);
 }
 
 
@@ -974,17 +987,17 @@ body.dark-mode {
 .dark-mode .skill-card,
 .dark-mode .project-card,
 .dark-mode .contact-form {
-    background: #1e1e1e; /* Darker grey background for containers */
+    background: #1e1e1e; 
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-    color: #f0f0f0; 
-    transition: background-color 0.5s, box-shadow 0.5s; /* Add transition for smoothness */
+    color: var(--text-color); 
+    transition: background-color 0.5s, box-shadow 0.5s; 
 }
 
 /* Ensure headings and titles remain readable */
 .dark-mode .about-text .about-title,
 .dark-mode .skill-card h3,
 .dark-mode .project-card h3 {
-    color: #0cff29; /* Keep the green highlight */
+    color: var(--primary-color); /* Keep the green highlight */
 }
 
 /* Fix text color inside contact form inputs */
@@ -992,12 +1005,12 @@ body.dark-mode {
 .dark-mode .contact-form textarea {
     background-color: #2c2c2c;
     border-color: #555;
-    color: #f0f0f0;
+    color: var(--text-color);
 }
 
 /* Fix text color for paragraphs/descriptions that were specifically set to black */
 .dark-mode p {
-    color: #f0f0f0;
+    color: var(--text-color);
 }
 .dark-mode .skill-card p {
     color: #ccc;
