@@ -1,222 +1,177 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr"> 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Albert Pingol | Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="name">Albert Pingol</title>
+    <link rel="stylesheet" href="styles.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <video autoplay muted loop class="bg-video" poster="images/background_poster.jpg">
-        <source id="background-video-source" src="videos/background.mp4" type="video/mp4">
-    </video>
+    <video autoplay muted loop id="background-video" class="bg-video">
+        <source src="videos/background.mp4" type="video/mp4" id="background-video-source">
+        Your browser does not support the video tag.
+    </video>
 
-    <header class="nav-header">
-        
-        <a href="#home" class="logo">
-            <img src="images/logo.png" alt="Logo">
-        </a>
-        
-        <nav class="nav-links">
-            <ul>
-                <li><a href="#home" class="active" data-i18n="nav_home">Home</a></li>
-                <li><a href="#about" data-i18n="nav_about">About</a></li>
-                <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
-                <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
-                <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
-            </ul>
-        </nav>
-        
-        <div class="icon-controls">
-            
-            <div class="lang-dropdown-container">
-                <button id="language-icon" class="icon-button" aria-label="Select Language">&#127760;</button> 
-                <div class="lang-dropdown-content">
-                    <span class="lang-option" data-lang="en">English (EN)</span>
-                    <span class="lang-option" data-lang="es">Español (ES)</span>
-                    <span class="lang-option" data-lang="tl">Tagalog (TL)</span>
-                    <span class="lang-option" data-lang="zh">中文 (ZH)</span>
-                    <span class="lang-option" data-lang="fr">Français (FR)</span>
-                    <span class="lang-option" data-lang="de">Deutsch (DE)</span>
-                    <span class="lang-option" data-lang="ar">العربية (AR)</span>
-                </div>
-            </div>
+    <header class="nav-header">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+        </div>
+        
+        <nav class="nav-links">
+            <ul>
+                <li><a href="#home" data-i18n="nav_home">Home</a></li>
+                <li><a href="#about" data-i18n="nav_about">About</a></li>
+                <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
+                <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+                <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+            </ul>
+        </nav>
 
-            <button id="darkModeToggle" class="icon-button" aria-label="Toggle dark mode">
-                &#127769; </button>
-        </div>
-        
-        <div class="menu-toggle">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-    </header>
+        <div class="icon-controls">
+            <button id="darkModeToggle" class="icon-button" aria-label="Toggle Dark Mode">
+                </button>
 
-    <main>
-        <section id="home" class="home-section">
-            <div class="text-content">
-                <h1 data-i18n="name">Albert Pingol</h1>
-                <h2>
-                    <span class="static-h2-text" data-i18n="job_title_static">Full Stack Software</span>
-                    <span class="changing-text">
-                        <span class="changing-text-word word-1" data-i18n="job_arch">Architect</span>
-                        <span class="changing-text-word word-2" data-i18n="job_design">Designer</span>
-                        <span class="changing-text-word word-3" data-i18n="job_dev">Developer</span>
-                    </span>
-                </h2>
-                <p class="intro-paragraph" data-i18n="home_intro">
-                    Hello! I'm a Web Developer, Designer, and Application Architect who creates modern, user-friendly, and scalable solutions with eye-catching designs that leave a lasting impression.
-                </p>
-                <div class="social-links">
-                    <a href="https://www.facebook.com/albert.pingol17" target="_blank">
-                        <img src="images/facebook.png" alt="Facebook link">
-                    </a>
-                    <a href="mailto:albert_pingol@sjp2cd.edu.ph" target="_blank">
-                        <img src="images/gmail.png" alt="Gmail link">
-                    </a>
-                    <a href="https://www.linkedin.com/in/albert-pingol-8339a42b1/" target="_blank">
-                        <img src="images/linkedin.png" alt="LinkedIn link">
-                    </a>
-                    <a href="Resume.pdf" download>
-                        <img src="images/cv.png" alt="Download Resume">
-                    </a>
-                </div>
-            </div>
-            <div class="image-content">
-                <img src="images/profile1.jpg" alt="Albert Pingol's professional photo">
-            </div>
-        </section>
-        
-        <section id="about" class="about-section">
-            <div class="about-container">
-                <div class="about-image">
-                    <img src="images/profile1.jpg" alt="Albert Pingol - About Me photo">
-                </div>
-                <div class="about-text">
-                    <h2 class="about-title" data-i18n="about_title">About Me</h2>
-                    <p data-i18n="about_p1">As a Full Stack Software Architect, I thrive on bridging the gap between elegant design and robust, scalable functionality. My journey in web development has been driven by a passion for creating digital experiences that are not just efficient, but genuinely enjoyable to use.</p>
-                    <p data-i18n="about_p2">I specialize in modern frameworks and technologies, consistently looking for new ways to make web solutions stand out.</p>
-                </div>
-            </div>
-        </section>
-        
-        <section id="skills" class="skills-section">
-            <h2 data-i18n="skills_heading">My Core Skills & Technologies</h2>
-            <div class="skills-container">
-                
-                <div class="skill-card">
-                    <h3 data-i18n="skill_fe_title">Front-End Development</h3>
-                    <p data-i18n="skill_fe_desc">Building responsive, dynamic user interfaces with modern tech.</p>
-                    <div class="icon-list">
-                        <img src="images/html.png" alt="HTML5 Icon" title="HTML5">
-                        <img src="images/css.png" alt="CSS3 Icon" title="CSS3">
-                        <img src="images/js.png" alt="JavaScript Icon" title="JavaScript">
-                        <img src="images/git.png" alt="Git Icon" title="Git">
-                        <img src="images/netlify.png" alt="Netlify Icon" title="Netlify">
-                    </div>
-                </div>
+            <div class="lang-dropdown-container">
+                <button class="icon-button" aria-label="Select Language">
+                    <i class="fas fa-globe"></i>
+                    <span id="langIcon">EN</span> 
+                </button>
+                <div class="lang-dropdown-content">
+                    <span class="lang-option" data-lang="en">English</span>
+                    <span class="lang-option" data-lang="es">Español</span>
+                    <span class="lang-option" data-lang="tl">Tagalog</span>
+                    <span class="lang-option" data-lang="zh">中文 (Chinese)</span>
+                    <span class="lang-option" data-lang="fr">Français</span>
+                    <span class="lang-option" data-lang="de">Deutsch</span>
+                    <span class="lang-option" data-lang="ar">العربية (Arabic)</span>
+                </div>
+            </div>
 
-                <div class="skill-card">
-                    <h3 data-i18n="skill_be_title">Back-End & Databases</h3>
-                    <p data-i18n="skill_be_desc">Designing and managing robust server-side logic and data storage.</p>
-                    <div class="icon-list">
-                        <img src="images/php.png" alt="PHP Icon" title="PHP">
-                        <img src="images/java.png" alt="Java Icon" title="Java">
-                        <img src="images/mysql.png" alt="MySQL Icon" title="MySQL">
-                        <img src="images/xampp.png" alt="XAMPP Icon" title="XAMPP">
-                    </div>
-                </div>
+            <button class="menu-toggle" aria-label="Toggle Navigation Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
 
-                <div class="skill-card">
-                    <h3 data-i18n="skill_tool_title">Tools, Design & AI</h3>
-                    <p data-i18n="skill_tool_desc">Leveraging creative and productivity tools for streamlined workflow.</p>
-                    <div class="icon-list">
-                        <img src="images/vscode.png" alt="VS Code Icon" title="VS Code">
-                        <img src="images/eclipse.png" alt="Eclipse Icon" title="Eclipse">
-                        <img src="images/figma.png" alt="Figma Icon" title="Figma">
-                        <img src="images/canva.png" alt="Canva Icon" title="Canva">
-                        <img src="images/chatgpt.png" alt="ChatGPT Icon" title="ChatGPT">
-                        <img src="images/gemini.png" alt="Gemini Icon" title="Gemini">
-                        <img src="images/msword.png" alt="MS Word Icon" title="MsWord">
-                        <img src="images/msxl.png" alt="MS Excel Icon" title="MSXL">
-                        <img src="images/msppt.png" alt="MS PPT Icon" title="MSPPT">
-                        <img src="images/gsheet.png" alt="Google Sheet Icon" title="GSHEET">
-                        <img src="images/pinterest.png" alt="Pinterest" title="Pinterest">
-                        <img src="images/capcut.png" alt="CapCut Icon" title="CapCut">
-                    </div>
-                </div>
+    <main>
+        <section id="home" class="home-section">
+            <div class="text-content">
+                <h1 data-i18n="name">Albert Pingol</h1>
+                <h2>
+                    <span class="static-h2-text" data-i18n="job_title_static">Full Stack Software</span>
+                    <span class="changing-text">
+                        <span class="changing-text-word word-1" data-i18n="job_arch">Architect</span>
+                        <span class="changing-text-word word-2" data-i18n="job_design">Designer</span>
+                        <span class="changing-text-word word-3" data-i18n="job_dev">Developer</span>
+                    </span>
+                </h2>
+                <p class="intro-paragraph" data-i18n="home_intro">
+                    Hello! I'm a Web Developer, Designer, and Application Architect who creates modern, user-friendly, and scalable solutions...
+                </p>
+                </div>
+            <div class="image-content">
+                <img src="images/profile.jpg" alt="Albert Pingol Profile">
+            </div>
+        </section>
 
-            </div>
-        </section>
+        <section id="about" class="about-section">
+            <div class="about-container">
+                <div class="about-image">
+                    <img src="images/about.jpg" alt="Albert Pingol professional image">
+                </div>
+                <div class="about-text">
+                    <h2 class="about-title" data-i18n="about_title">About Me</h2>
+                    <p data-i18n="about_p1">
+                        As a Full Stack Software Architect, I thrive on bridging the gap between elegant design and robust, scalable functionality...
+                    </p>
+                    <p data-i18n="about_p2">
+                        I specialize in modern frameworks and technologies, consistently looking for new ways to make web solutions stand out.
+                    </p>
+                </div>
+            </div>
+        </section>
 
-        <section id="projects" class="projects-section">
-            <h2 data-i18n="projects_heading">My Projects</h2>
-            <div class="projects-container">
-                
-                <div class="project-card">
-                    <img src="images/AgriWebsite.PNG" alt="Screenshot of AgriWebsite Educational Website">
-                    <h3 data-i18n="proj1_title">AgriWebsite Educational Website</h3>
-                    <p data-i18n="proj1_desc">A dedicated platform bridging technology and tradition to promote sustainable farming. Provides valuable resources and innovative tools for farm efficiency and environmentally friendly practices.</p>
-                    <a href="YOUR_AGRI_WEBSITE_URL_HERE" target="_blank" class="project-btn" data-i18n="visit_site">Visit Site</a>
-                </div>
-                
-                <div class="project-card">
-                    <img src="images/Timeless Blooms.PNG" alt="Screenshot of Timeless Blooms Flowershop E-Commerce website">
-                    <h3 data-i18n="proj2_title">Timeless Blooms Flowershop E-Commerce</h3>
-                    <p data-i18n="proj2_desc">A high-quality e-commerce floral platform ensuring maximum freshness. It provides seamless shopping for stunning, meticulously sourced bouquets for any special event.</p>
-                    <a href="YOUR_BLOOMS_WEBSITE_URL_HERE" target="_blank" class="project-btn" data-i18n="visit_site">Visit Site</a>
-                </div>
-                
-                <div class="project-card">
-                    <img src="images/CRUD.PNG" alt="Screenshot of a generic project interface">
-                    <h3 data-i18n="proj3_title">Inventory Management System</h3>
-                    <p data-i18n="proj3_desc">A back-end system demonstrating Create, Read, Update, and Delete functionality for streamlined stock control and data management.</p>
-                    <a href="YOUR_INVENTORY_WEBSITE_URL_HERE" target="_blank" class="project-btn" data-i18n="visit_site">Visit Site</a>
-                </div>
-            </div>
-        </section>
+        <section id="skills" class="skills-section">
+            <h2 data-i18n="skills_heading">My Core Skills & Technologies</h2>
+            <div class="skills-container">
+                <div class="skill-card">
+                    <h3 data-i18n="skill_fe_title">Front-End Development</h3>
+                    <p data-i18n="skill_fe_desc">Building responsive, dynamic user interfaces with modern tech.</p>
+                    </div>
+                <div class="skill-card">
+                    <h3 data-i18n="skill_be_title">Back-End & Databases</h3>
+                    <p data-i18n="skill_be_desc">Designing and managing robust server-side logic and data storage.</p>
+                    </div>
+                <div class="skill-card">
+                    <h3 data-i18n="skill_tool_title">Tools, Design & AI</h3>
+                    <p data-i18n="skill_tool_desc">Leveraging creative and productivity tools for streamlined workflow.</p>
+                    </div>
+            </div>
+        </section>
 
-        <section id="contact" class="contact-section">
-            <h2 data-i18n="contact_heading">Want to collaborate or hire me?</h2>
-            <p class="contact-intro" data-i18n="contact_intro_p">
-                Whether you have a project idea, a job opportunity, or just want to say hello, feel free to reach out using the form below!
-            </p>
-            <div class="contact-content-wrapper">
-                <div class="contact-image-wrapper">
-                    <img src="images/cute_animal.jpg" alt="Contact Icon"> </div>
-                <div class="contact-form-container">
-                    <form class="contact-form" action="YOUR_FORM_ENDPOINT_HERE" method="POST">
-                        <div class="form-group">
-                            <label for="name" data-i18n="form_name_label">Name:</label>
-                            <input type="text" id="name" name="name" placeholder="Your Full Name" required data-i18n-placeholder="form_name_ph">
-                        </div>
-                        <div class="form-group">
-                            <label for="email" data-i18n="form_email_label">Email:</label>
-                            <input type="email" id="email" name="email" placeholder="your.email" required data-i18n-placeholder="form_email_ph">
-                        </div>
-                        <div class="form-group">
-                            <label for="subject" data-i18n="form_subject_label">Subject:</label>
-                            <input type="text" id="subject" name="subject" placeholder="Briefly what this is about" required data-i18n-placeholder="form_subject_ph">
-                        </div>
-                        <div class="form-group">
-                            <label for="message" data-i18n="form_message_label">Message:</label>
-                            <textarea id="message" name="message" rows="5" placeholder="Tell me about your project or inquiry" data-i18n-placeholder="form_message_ph"></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn" data-i18n="form_button">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
+        <section id="projects" class="projects-section">
+            <h2 data-i18n="projects_heading">My Projects</h2>
+            <div class="projects-container">
+                <div class="project-card">
+                    <h3 data-i18n="proj1_title">AgriWebsite Educational Website</h3>
+                    <p data-i18n="proj1_desc">A dedicated platform bridging technology and tradition...</p>
+                    <a href="#" class="project-btn" data-i18n="visit_site">Visit Site</a>
+                </div>
+                <div class="project-card">
+                    <h3 data-i18n="proj2_title">Timeless Blooms Flowershop E-Commerce</h3>
+                    <p data-i18n="proj2_desc">A high-quality e-commerce floral platform ensuring maximum freshness...</p>
+                    <a href="#" class="project-btn" data-i18n="visit_site">Visit Site</a>
+                </div>
+                <div class="project-card">
+                    <h3 data-i18n="proj3_title">Inventory Management System</h3>
+                    <p data-i18n="proj3_desc">A back-end system demonstrating Create, Read, Update, and Delete functionality...</p>
+                    <a href="#" class="project-btn" data-i18n="visit_site">Visit Site</a>
+                </div>
+            </div>
+        </section>
 
-    <footer class="site-footer" data-i18n="footer_copyright">
-        © 2025 Albert Pingol. All Rights Reserved.
-    </footer>
-    
-    <script src="js/script.js"></script>
+        <section id="contact" class="contact-section">
+            <h2 data-i18n="contact_heading">Want to collaborate or hire me?</h2>
+            <p class="contact-intro" data-i18n="contact_intro_p">
+                Whether you have a project idea, a job opportunity, or just want to say hello, feel free to reach out...
+            </p>
+            <div class="contact-content-wrapper">
+                <div class="contact-image-wrapper">
+                    <img src="images/contact.jpg" alt="Contact image">
+                </div>
+                <div class="contact-form-container">
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <label for="name" data-i18n="form_name_label">Name:</label>
+                            <input type="text" id="name" name="name" required data-i18n-placeholder="form_name_ph">
+                        </div>
+                        <div class="form-group">
+                            <label for="email" data-i18n="form_email_label">Email:</label>
+                            <input type="email" id="email" name="email" required data-i18n-placeholder="form_email_ph">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject" data-i18n="form_subject_label">Subject:</label>
+                            <input type="text" id="subject" name="subject" required data-i18n-placeholder="form_subject_ph">
+                        </div>
+                        <div class="form-group">
+                            <label for="message" data-i18n="form_message_label">Message:</label>
+                            <textarea id="message" name="message" rows="5" required data-i18n-placeholder="form_message_ph"></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn" data-i18n="form_button">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 Albert Pingol. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script> 
 </body>
-
 </html>
