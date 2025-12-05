@@ -40,8 +40,7 @@ body {
 
 html {
     scroll-behavior: smooth;
-    /* Increased scroll padding to account for the fixed header height */
-    scroll-padding-top: 100px; 
+    scroll-padding-top: 160px;
 }
 
 /* ================================================= */
@@ -312,7 +311,6 @@ html {
     justify-content: center;
     align-items: center;
     overflow: hidden; 
-    /* Desktop padding */
     padding: 100px 15px 40px 15px; 
     background: transparent; 
     gap: 100px; 
@@ -673,7 +671,6 @@ html {
     background: rgba(255, 255, 255, 0.1);
     overflow: hidden;
     box-shadow: 0 0 50px rgba(12, 255, 41, 0.5);
-    /* DEFAULT DESKTOP ORDER */
     order: 1; 
 }
 
@@ -694,7 +691,6 @@ html {
     justify-content: center;
     flex-grow: 1;
     max-width: 600px;
-    /* DEFAULT DESKTOP ORDER */
     order: 2;
 }
 
@@ -779,46 +775,80 @@ html {
 
 @media (max-width: 768px) {
     
-    /* --- HEADER FIXES --- */
+    /* FIX: Reduce padding on the fixed header for mobile view */
     .nav-header {
         padding: 10px 15px;
     }
+    
+    /* 1. LOGO: First element, pushes others right */
     .nav-header .logo {
         order: 1; 
-        margin-right: auto; 
+        margin-right: auto; /* Push the rest of the elements to the right edge */
     }
     
-    /* Reduced margin/gap to prevent hamburger clipping */
+    /* 2. ICON CONTROLS: Second element, grouped with hamburger */
     .icon-controls {
         order: 2; 
         margin-left: 0;
-        margin-right: 10px; 
-        gap: 8px; 
+        margin-right: 15px; /* Space before the hamburger */
+        gap: 10px;
         display: flex; 
         align-items: center;
     }
+    
+    /* 3. HAMBURGER MENU: Last element, on the far right edge */
     .menu-toggle {
         display: flex; 
         order: 3; 
         margin-left: 0;
     }
     
-    /* --- MOBILE NAV LINKS FIX (Fixing Clutter) --- */
+    /* Increase Icon Touch Targets (Tappability fix) */
+    .icon-button {
+        width: 38px;
+        height: 38px;
+        font-size: 1.4rem; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Language Dropdown placement and size */
+    .lang-dropdown-content {
+        min-width: 150px; 
+        right: 0; 
+        left: auto;
+    }
+
+    /* Collapse/Hide the desktop navigation menu */
     .nav-links {
+        position: fixed;
+        top: 0;
+        right: 0;
         height: 100vh;
         width: 300px; 
-        z-index: 1000; /* Ensure menu is above other content */
-        /* Increased padding to push links down below the fixed header area */
-        padding-top: 100px; 
+        background-color: var(--nav-mobile-bg); 
+        transform: translateX(100%); 
+        z-index: 999; 
+        padding-top: 100px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    /* When the menu is toggled open by JS */
+    .nav-links.active {
+        transform: translateX(0); 
     }
 
     /* Adjust the navigation list for vertical stacking */
     .nav-links ul {
         flex-direction: column;
         width: 100%;
-        gap: 25px; /* Better link spacing */
+        gap: 30px;
         margin: 0;
-        padding: 0 40px; 
+        padding: 20px 40px;
     }
     
     .nav-links li {
@@ -827,81 +857,51 @@ html {
         padding-bottom: 10px;
     }
 
-    /* --- CONTENT OVERLAP FIX --- */
-    
-    /* Pushes the first content section down below the fixed header */
+    /* Home Section adjustments */
     .home-section {
-        padding-top: 100px; /* CRITICAL: Adds necessary spacing */
-        padding-bottom: 40px;
-        gap: 20px;
         flex-direction: column;
-    }
-    
-    /* Ensures subsequent sections clear the fixed header when scrolling */
-    .about-section,
-    .skills-section,
-    .projects-section,
-    .contact-section {
-        padding: 60px 15px; /* Use consistent, narrow horizontal padding */
-        /* Adds extra margin to ensure the section title clears the fixed header on load/scroll-to */
-        margin-top: 70px; 
+        padding: 100px 15px 40px;
+        gap: 20px;
     }
 
     .image-content {
-        order: -1; 
         width: 250px; 
         height: 250px;
+        padding: 0;
+        order: -1; 
         margin-bottom: 10px;
-    }
-
-    /* --- FULL-WIDTH CARD FIXES --- */
-    
-    .about-text {
-        max-width: none; 
-        width: 100%; 
-        padding: 30px;
-        border-radius: 30px;
-        margin: 0; 
+        box-shadow: 0 0 10px rgba(12, 255, 41, 0.4);
     }
     
-    .skill-card {
-        padding: 25px;
-        flex: 1 1 100%; 
-        max-width: none; 
-        width: 100%; 
-        margin: 0 5px; 
+    /* Projects Section Adjustments (Fixing Skinniness) */
+    .projects-section {
+        padding: 60px 15px; /* Reduced side padding */
     }
     
     .project-card {
         padding: 25px;
+        /* CRITICAL FIX: Make the card take full width of the container */
         flex: 1 1 100%; 
         max-width: none; 
         width: 100%; 
-        margin: 0 5px; 
+        margin: 0 5px; /* Small outer margin for screen edge breathing room */
     }
-    
-    /* --- CONTACT SECTION REORDER (Image at Top) --- */
-    .contact-content-wrapper {
-        flex-direction: column;
-        gap: 30px;
+
+    /* About, Skills, Contact adjustments remain consistent */
+    .about-image {
+        width: 250px;
+        height: 250px;
     }
-    
+    .about-text {
+        max-width: 400px; 
+        width: 90%; 
+    }
     .contact-image-wrapper {
-        order: -1; 
         width: 200px;
         height: 200px;
     }
-    
-    .contact-form-container {
-        order: 1;
-        max-width: none;
-        width: 100%;
-    }
-    
     .contact-form {
-        padding: 30px;
-        width: 100%;
-        max-width: none; 
+        width: 90%;
     }
 }
 
