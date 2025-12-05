@@ -72,7 +72,6 @@ const translations = {
         'form_message_label': 'Mensahe:', 'form_message_ph': 'Sabihin sa akin ang tungkol sa iyong proyekto o katanungan',
         'form_button': 'Ipadala ang Mensahe'
     },
-    // --- NEW LANGUAGE ADDITIONS START HERE ---
     'zh': { // Mandarin Chinese (Simplified)
         'nav_home': '主页', 'nav_about': '关于', 'nav_skills': '技能', 'nav_projects': '项目', 'nav_contact': '联系',
         'name': 'Albert Pingol', 'job_title_static': '全栈软件', 'job_arch': '架构师', 'job_design': '设计师', 'job_dev': '开发人员',
@@ -168,10 +167,7 @@ const translations = {
         'form_subject_label': 'الموضوع:', 'form_subject_ph': 'مختصر عن سبب الاتصال',
         'form_message_label': 'الرسالة:', 'form_message_ph': 'أخبرني عن مشروعك أو استفسارك',
         'form_button': 'إرسال الرسالة'
-    },
-    // --- EXISTING LANGUAGES ---
-    // 'es': { ... },
-    // 'tl': { ... }
+    }
 };
 
 // --- CORE NAVIGATION LOGIC ---
@@ -215,7 +211,7 @@ const navLinkElements = document.querySelectorAll('.nav-links a');
 
 const observerOptions = {
     root: null,
-    rootMargin: '0px 0px -70% 0px',
+    rootMargin: '0px 0px -70% 0px', // Highlights section when 30% from top
     threshold: 0.1
 };
 
@@ -254,9 +250,13 @@ function applyTheme(isDarkMode) {
     }
 
     if (videoSource && videoElement) {
-        videoSource.src = isDarkMode ? NIGHT_MODE_VIDEO : DAY_MODE_VIDEO;
-        videoElement.load();
-        videoElement.play();
+        // Only swap if the source is actually different to avoid unnecessary reloading
+        const newSrc = isDarkMode ? NIGHT_MODE_VIDEO : DAY_MODE_VIDEO;
+        if (videoSource.src !== newSrc) {
+            videoSource.src = newSrc;
+            videoElement.load();
+            videoElement.play();
+        }
     }
 
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
@@ -294,7 +294,8 @@ document.addEventListener('click', (event) => {
 // 3. Set Language when an option is clicked
 langOptions.forEach(option => {
     option.addEventListener('click', (event) => {
-        const selectedLang = event.target.getAttribute('data-lang');
+        // Use currentTarget to ensure the handler is on the span element
+        const selectedLang = event.currentTarget.getAttribute('data-lang');
         setLanguage(selectedLang);
         if (langDropdownContainer) {
             langDropdownContainer.classList.remove('active');
@@ -328,6 +329,10 @@ function setLanguage(lang) {
     // 3. Update the HTML lang attribute for accessibility and SEO
     document.documentElement.setAttribute('lang', lang);
 
+    // 🌟 4. Set Text Direction (RTL for Arabic, LTR otherwise)
+    const isRTL = lang === 'ar';
+    document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+
     // Save language preference
     localStorage.setItem('language', lang);
 }
@@ -337,6 +342,7 @@ function setLanguage(lang) {
 
 function loadTheme() {
     const savedTheme = localStorage.getItem('theme');
+    // Check local storage, or default to OS preference if none saved
     const isDarkMode = (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches));
     applyTheme(isDarkMode);
 }
@@ -352,8 +358,13 @@ document.addEventListener('DOMContentLoaded', () => {
     loadTheme();
     loadTranslation();
 
-    // Initial active link setting
+    // Initial active link setting for Scroll Spy
     if(navLinkElements.length > 0) {
-         navLinkElements[0].classList.add('active');
+       // Since the Scroll Spy logic is based on IntersectionObserver, 
+       // it will usually take over quickly. We ensure the first link is active initially.
+       const homeLink = document.querySelector('.nav-links a[href="#home"]');
+       if (homeLink) {
+           homeLink.classList.add('active');
+       }
     }
 });
