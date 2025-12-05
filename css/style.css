@@ -40,7 +40,8 @@ body {
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 160px;
+    /* Increased scroll padding to account for the fixed header height */
+    scroll-padding-top: 100px; 
 }
 
 /* ================================================= */
@@ -311,6 +312,7 @@ html {
     justify-content: center;
     align-items: center;
     overflow: hidden; 
+    /* Desktop padding */
     padding: 100px 15px 40px 15px; 
     background: transparent; 
     gap: 100px; 
@@ -785,11 +787,13 @@ html {
         order: 1; 
         margin-right: auto; 
     }
+    
+    /* Reduced margin/gap to prevent hamburger clipping */
     .icon-controls {
         order: 2; 
         margin-left: 0;
-        margin-right: 15px;
-        gap: 10px;
+        margin-right: 10px; 
+        gap: 8px; 
         display: flex; 
         align-items: center;
     }
@@ -798,78 +802,103 @@ html {
         order: 3; 
         margin-left: 0;
     }
+    
+    /* --- MOBILE NAV LINKS FIX (Fixing Clutter) --- */
     .nav-links {
         height: 100vh;
         width: 300px; 
+        z-index: 1000; /* Ensure menu is above other content */
+        /* Increased padding to push links down below the fixed header area */
+        padding-top: 100px; 
     }
 
-    /* --- HOME SECTION --- */
-    .home-section {
-        padding: 100px 15px 40px;
-        gap: 20px;
+    /* Adjust the navigation list for vertical stacking */
+    .nav-links ul {
+        flex-direction: column;
+        width: 100%;
+        gap: 25px; /* Better link spacing */
+        margin: 0;
+        padding: 0 40px; 
     }
-
-    /* --- CONTENT CARD FIXES (Full Width) --- */
     
-    .about-section {
-        padding: 60px 15px; /* Adjust section padding */
+    .nav-links li {
+        width: 100%;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 10px;
     }
+
+    /* --- CONTENT OVERLAP FIX --- */
+    
+    /* Pushes the first content section down below the fixed header */
+    .home-section {
+        padding-top: 100px; /* CRITICAL: Adds necessary spacing */
+        padding-bottom: 40px;
+        gap: 20px;
+        flex-direction: column;
+    }
+    
+    /* Ensures subsequent sections clear the fixed header when scrolling */
+    .about-section,
+    .skills-section,
+    .projects-section,
+    .contact-section {
+        padding: 60px 15px; /* Use consistent, narrow horizontal padding */
+        /* Adds extra margin to ensure the section title clears the fixed header on load/scroll-to */
+        margin-top: 70px; 
+    }
+
+    .image-content {
+        order: -1; 
+        width: 250px; 
+        height: 250px;
+        margin-bottom: 10px;
+    }
+
+    /* --- FULL-WIDTH CARD FIXES --- */
+    
     .about-text {
-        /* CRITICAL: Make about text card full width */
         max-width: none; 
         width: 100%; 
         padding: 30px;
         border-radius: 30px;
-        margin: 0; /* Remove existing auto margins */
+        margin: 0; 
     }
     
-    .skills-section {
-        padding: 60px 15px;
-    }
     .skill-card {
         padding: 25px;
-        /* CRITICAL: Make skill card full width */
         flex: 1 1 100%; 
         max-width: none; 
         width: 100%; 
         margin: 0 5px; 
     }
     
-    .projects-section {
-        padding: 60px 15px;
-    }
     .project-card {
         padding: 25px;
-        /* CRITICAL: Make project card full width */
         flex: 1 1 100%; 
         max-width: none; 
         width: 100%; 
         margin: 0 5px; 
     }
     
-    /* --- CONTACT SECTION FIXES (Image at Top) --- */
+    /* --- CONTACT SECTION REORDER (Image at Top) --- */
     .contact-content-wrapper {
         flex-direction: column;
         gap: 30px;
     }
     
     .contact-image-wrapper {
-        /* Puts image at the top of the column (above the form) */
         order: -1; 
         width: 200px;
         height: 200px;
-        box-shadow: 0 0 30px rgba(12, 255, 41, 0.5);
     }
     
     .contact-form-container {
-        /* Puts form below the image */
         order: 1;
         max-width: none;
-        width: 100%; /* Ensure container is full width */
+        width: 100%;
     }
     
     .contact-form {
-        /* CRITICAL: Make contact form full width */
         padding: 30px;
         width: 100%;
         max-width: none; 
