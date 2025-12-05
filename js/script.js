@@ -4,10 +4,10 @@ const translations = {
         'nav_home': 'Home', 'nav_about': 'About', 'nav_skills': 'Skills', 'nav_projects': 'Projects', 'nav_contact': 'Contact',
         'name': 'Albert Pingol', 'job_title_static': 'Full Stack Software', 'job_arch': 'Architect', 'job_design': 'Designer', 'job_dev': 'Developer',
         'home_intro': "Hello! I'm a Web Developer, Designer, and Application Architect who creates modern, user-friendly, and scalable solutions with eye-catching designs that leave a lasting impression.",
-        'about_title': 'About Me', 
+        'about_title': 'About Me',
         'about_p1': 'As a Full Stack Software Architect, I thrive on bridging the gap between elegant design and robust, scalable functionality. My journey in web development has been driven by a passion for creating digital experiences that are not just efficient, but genuinely enjoyable to use.',
         'about_p2': 'I specialize in modern frameworks and technologies, consistently looking for new ways to make web solutions stand out.',
-        'skills_heading': 'My Core Skills & Technologies', 
+        'skills_heading': 'My Core Skills & Technologies',
         'skill_fe_title': 'Front-End Development', 'skill_fe_desc': 'Building responsive, dynamic user interfaces with modern tech.',
         'skill_be_title': 'Back-End & Databases', 'skill_be_desc': 'Designing and managing robust server-side logic and data storage.',
         'skill_tool_title': 'Tools, Design & AI', 'skill_tool_desc': 'Leveraging creative and productivity tools for streamlined workflow.',
@@ -28,10 +28,10 @@ const translations = {
         'nav_home': 'Inicio', 'nav_about': 'Acerca de', 'nav_skills': 'Habilidades', 'nav_projects': 'Proyectos', 'nav_contact': 'Contacto',
         'name': 'Albert Pingol', 'job_title_static': 'Software Full Stack', 'job_arch': 'Arquitecto', 'job_design': 'Diseñador', 'job_dev': 'Desarrollador',
         'home_intro': "¡Hola! Soy un Desarrollador Web, Diseñador y Arquitecto de Aplicaciones que crea soluciones modernas, escalables y fáciles de usar con diseños llamativos que dejan una impresión duradera.",
-        'about_title': 'Acerca de Mí', 
+        'about_title': 'Acerca de Mí',
         'about_p1': 'Como Arquitecto de Software Full Stack, me dedico a unir el diseño elegante con la funcionalidad robusta y escalable. Mi camino en el desarrollo web se impulsa por la pasión de crear experiencias digitales que no solo sean eficientes, sino genuinamente agradables de usar.',
         'about_p2': 'Me especializo en marcos y tecnologías modernas, buscando constantemente nuevas formas de hacer que las soluciones web destaquen.',
-        'skills_heading': 'Mis Habilidades y Tecnologías Principales', 
+        'skills_heading': 'Mis Habilidades y Tecnologías Principales',
         'skill_fe_title': 'Desarrollo Front-End', 'skill_fe_desc': 'Construyendo interfaces de usuario dinámicas y receptivas con tecnología moderna.',
         'skill_be_title': 'Back-End y Bases de Datos', 'skill_be_desc': 'Diseñando y administrando lógica de servidor y almacenamiento de datos robustos.',
         'skill_tool_title': 'Herramientas, Diseño e IA', 'skill_tool_desc': 'Aprovechando herramientas creativas y de productividad para un flujo de trabajo optimizado.',
@@ -52,10 +52,10 @@ const translations = {
         'nav_home': 'Tahanan', 'nav_about': 'Tungkol sa Akin', 'nav_skills': 'Kasanayan', 'nav_projects': 'Mga Proyekto', 'nav_contact': 'Kontakin',
         'name': 'Albert Pingol', 'job_title_static': 'Full Stack Software', 'job_arch': 'Arkitekto', 'job_design': 'Disenyador', 'job_dev': 'Developer',
         'home_intro': "Kumusta! Ako ay isang Web Developer, Designer, at Application Architect na gumagawa ng moderno, user-friendly, at scalable na mga solusyon na may kaakit-akit na disenyo na nag-iiwan ng pangmatagalang impresyon.",
-        'about_title': 'Tungkol sa Akin', 
+        'about_title': 'Tungkol sa Akin',
         'about_p1': 'Bilang isang Full Stack Software Architect, mahilig akong pag-ugnayin ang eleganteng disenyo at matatag, scalable na functionality. Ang aking paglalakbay sa pag-develop ng web ay hinihimok ng hilig sa paggawa ng mga digital na karanasan na hindi lang mahusay, kundi talagang kasiya-siyang gamitin.',
         'about_p2': 'Dalubhasa ako sa mga modernong framework at teknolohiya, patuloy na naghahanap ng mga bagong paraan upang mapansin ang mga solusyon sa web.',
-        'skills_heading': 'Aking Mga Pangunahing Kasanayan at Teknolohiya', 
+        'skills_heading': 'Aking Mga Pangunahing Kasanayan at Teknolohiya',
         'skill_fe_title': 'Front-End Development', 'skill_fe_desc': 'Paggawa ng responsive, dynamic na user interfaces gamit ang modernong teknolohiya.',
         'skill_be_title': 'Back-End at Database', 'skill_be_desc': 'Pagdidisenyo at pamamahala ng matatag na server-side logic at pag-iimbak ng data.',
         'skill_tool_title': 'Mga Tool, Disenyo at AI', 'skill_tool_desc': 'Paggamit ng mga tool sa pagkamalikhain at pagiging produktibo para sa streamlined na daloy ng trabaho.',
@@ -86,13 +86,18 @@ if (menuToggle && navLinks) {
     });
 }
 
-// Close menu when a link is clicked
+// Close menu and manage 'active' class when a link is clicked
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
+        // Manage Mobile Menu state
         if (menuToggle && navLinks) {
             menuToggle.classList.remove('active');
             navLinks.classList.remove('active');
         }
+        
+        // Manual 'active' class management for desktop/mobile consistency
+        document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
     });
 });
 
@@ -108,45 +113,77 @@ window.addEventListener('scroll', () => {
     }
 });
 
+// --- SCROLL SPY LOGIC using Intersection Observer (Best Practice) ---
+
+const sections = document.querySelectorAll('section[id]');
+const navLinkElements = document.querySelectorAll('.nav-links a');
+
+const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -70% 0px', // Highlight link when section is 30% from the top
+    threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const currentSectionId = entry.target.id;
+            
+            // Remove 'active' from all links
+            navLinkElements.forEach(link => link.classList.remove('active'));
+
+            // Add 'active' to the link corresponding to the current section
+            const targetLink = document.querySelector(`.nav-links a[href="#${currentSectionId}"]`);
+            if (targetLink) {
+                targetLink.classList.add('active');
+            }
+        }
+    });
+}, observerOptions);
+
+sections.forEach(section => {
+    observer.observe(section);
+});
+
 
 // --- DARK MODE & VIDEO SWAP LOGIC ---
 
 const darkModeToggle = document.getElementById('darkModeToggle');
-const videoSource = document.getElementById('background-video-source'); 
-const videoElement = document.querySelector('.bg-video');              
+const videoSource = document.getElementById('background-video-source');
+const videoElement = document.querySelector('.bg-video');
 const MOON_ICON = '&#127769;'; // 🌙
-const SUN_ICON = '&#127774;';  // ☀️
+const SUN_ICON = '&#127774;'; // ☀️
 
 // Define the correct file paths for each mode
 const DAY_MODE_VIDEO = 'videos/background.mp4';
-const NIGHT_MODE_VIDEO = 'videos/background2.mp4'; 
+const NIGHT_MODE_VIDEO = 'videos/background2.mp4';
 
-function toggleDarkMode() {
-    // Toggles the 'dark-mode' class on the body
-    const isDarkMode = document.body.classList.toggle('dark-mode');
-    
-    // 1. Change icon based on mode
+// Setter function to apply the desired theme state
+function applyTheme(isDarkMode) {
+    // 1. Toggle the 'dark-mode' class on the body
+    document.body.classList.toggle('dark-mode', isDarkMode);
+
+    // 2. Change icon based on mode
     if (darkModeToggle) {
         darkModeToggle.innerHTML = isDarkMode ? SUN_ICON : MOON_ICON;
     }
 
-    // 2. Swap the video source
+    // 3. Swap the video source
     if (videoSource && videoElement) {
-        if (isDarkMode) {
-            videoSource.src = NIGHT_MODE_VIDEO;
-        } else {
-            videoSource.src = DAY_MODE_VIDEO;
-        }
-        
-        // IMPORTANT: Force the video element to load the new source
-        videoElement.load(); 
-        
-        // Restart the video
-        videoElement.play(); 
+        videoSource.src = isDarkMode ? NIGHT_MODE_VIDEO : DAY_MODE_VIDEO;
+
+        // IMPORTANT: Force the video element to load the new source and play
+        videoElement.load();
+        videoElement.play();
     }
 
-    // 3. Save preference to localStorage
+    // 4. Save preference to localStorage
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+}
+
+function toggleDarkMode() {
+    const isDarkMode = !document.body.classList.contains('dark-mode');
+    applyTheme(isDarkMode);
 }
 
 // Attach listener to toggle button
@@ -163,8 +200,7 @@ const langOptions = document.querySelectorAll('.lang-option');
 // 1. Toggle dropdown menu visibility
 if (langDropdownContainer) {
     langDropdownContainer.addEventListener('click', (event) => {
-        // Prevent click from immediately propagating to the window listener (which closes it)
-        event.stopPropagation(); 
+        event.stopPropagation();
         langDropdownContainer.classList.toggle('active');
     });
 }
@@ -210,7 +246,10 @@ function setLanguage(lang) {
             element.setAttribute('placeholder', dict[key]);
         }
     });
-    
+
+    // 3. Update the HTML lang attribute for accessibility and SEO
+    document.documentElement.setAttribute('lang', lang);
+
     // Save language preference
     localStorage.setItem('language', lang);
 }
@@ -220,31 +259,12 @@ function setLanguage(lang) {
 
 function loadTheme() {
     const savedTheme = localStorage.getItem('theme');
-    
-    // Check saved preference or system preference
+
+    // Determine the initial state: saved preference OR system preference
     const isDarkMode = (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches));
 
-    if (isDarkMode) {
-        document.body.classList.add('dark-mode');
-        if (darkModeToggle) {
-            darkModeToggle.innerHTML = SUN_ICON;
-        }
-        // Load the night video source on startup if dark mode is active
-        if (videoSource && videoElement) {
-            videoSource.src = NIGHT_MODE_VIDEO;
-            videoElement.load();
-        }
-
-    } else {
-        if (darkModeToggle) {
-            darkModeToggle.innerHTML = MOON_ICON;
-        }
-        // Load the day video source on startup if light mode is active
-        if (videoSource && videoElement) {
-            videoSource.src = DAY_MODE_VIDEO;
-            videoElement.load();
-        }
-    }
+    // Apply the determined state using the unified setter function
+    applyTheme(isDarkMode);
 }
 
 function loadTranslation() {
@@ -258,4 +278,9 @@ function loadTranslation() {
 document.addEventListener('DOMContentLoaded', () => {
     loadTheme();
     loadTranslation();
+    
+    // Initial active link setting (handles the case where the first section isn't scrolled past)
+    if(navLinkElements.length > 0) {
+         navLinkElements[0].classList.add('active');
+    }
 });
