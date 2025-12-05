@@ -56,7 +56,7 @@ html {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* Reduced vertical padding from 10px to 15px for better spacing */
+    /* Padding set for desktop */
     padding: 15px 100px; 
     z-index: 1000;
     background-color: transparent;
@@ -94,8 +94,6 @@ html {
     display: flex;
     align-items: center;
     gap: 2rem; 
-    /* Desktop links are centered by default, but we'll use margin-left: auto 
-       in a combined block with icons to push them right if needed. */
     margin-left: auto; 
     transition: transform 0.3s ease-in-out; 
 }
@@ -779,26 +777,34 @@ html {
     
     /* FIX: Reduce padding on the fixed header for mobile view */
     .nav-header {
-        padding: 10px 15px; /* Reduced padding */
+        padding: 10px 15px;
     }
     
-    /* 🍔 HAMBURGER MENU FIX: Must be 'flex' to show up on mobile */
-    .menu-toggle {
-        display: flex; 
-        margin-left: auto; /* Pushes it away from the icons */
-        order: 3; /* Position last in the header row: Logo | Icons | Hamburger */
+    /* 1. LOGO: First element, pushes others right */
+    .nav-header .logo {
+        order: 1; 
+        margin-right: auto; /* Push the rest of the elements to the right edge */
     }
-
-    /* FIX: ICON CONTROLS (Day/Night & Language) - Re-order and size for mobile */
+    
+    /* 2. ICON CONTROLS: Second element, grouped with hamburger */
     .icon-controls {
-        order: 2; /* Position after the logo, before the hamburger */
-        margin-left: 10px;
+        order: 2; 
+        margin-left: 0;
         margin-right: 15px; /* Space before the hamburger */
         gap: 10px;
+        display: flex; 
+        align-items: center;
     }
     
+    /* 3. HAMBURGER MENU: Last element, on the far right edge */
+    .menu-toggle {
+        display: flex; 
+        order: 3; 
+        margin-left: 0;
+    }
+    
+    /* Increase Icon Touch Targets (Tappability fix) */
     .icon-button {
-        /* Set a definitive touch target size */
         width: 38px;
         height: 38px;
         font-size: 1.4rem; 
@@ -809,10 +815,10 @@ html {
         background-color: rgba(255, 255, 255, 0.1);
     }
     
-    /* FIX: Language Dropdown placement and size */
+    /* Language Dropdown placement and size */
     .lang-dropdown-content {
         min-width: 150px; 
-        right: 0; /* Ensures it aligns to the right of the icon */
+        right: 0; 
         left: auto;
     }
 
@@ -824,7 +830,7 @@ html {
         height: 100vh;
         width: 300px; 
         background-color: var(--nav-mobile-bg); 
-        transform: translateX(100%); /* Start off-screen */
+        transform: translateX(100%); 
         z-index: 999; 
         padding-top: 100px;
         flex-direction: column;
@@ -833,7 +839,7 @@ html {
     
     /* When the menu is toggled open by JS */
     .nav-links.active {
-        transform: translateX(0); /* Slide into view */
+        transform: translateX(0); 
     }
 
     /* Adjust the navigation list for vertical stacking */
@@ -866,113 +872,51 @@ html {
         margin-bottom: 10px;
         box-shadow: 0 0 10px rgba(12, 255, 41, 0.4);
     }
-    .image-content img {
-        width: 100%;
-        height: 100%;
-        box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    
+    /* Projects Section Adjustments (Fixing Skinniness) */
+    .projects-section {
+        padding: 60px 15px; /* Reduced side padding */
     }
     
-    .text-content {
-        text-align: center;
-    }
-    
-    .text-content .intro-paragraph {
-        max-width: none;
-        padding: 0 10px;
-    }
-    .social-links {
-        justify-content: center;
+    .project-card {
+        padding: 25px;
+        /* CRITICAL FIX: Make the card take full width of the container */
+        flex: 1 1 100%; 
+        max-width: none; 
+        width: 100%; 
+        margin: 0 5px; /* Small outer margin for screen edge breathing room */
     }
 
-    .text-content h1 {
-        font-size: clamp(30px, 8vw, 80px);
-    }
-
-    .text-content h2 {
-        font-size: clamp(18px, 5vw, 35px);
-    }
-
-    /* About container on mobile */
-    .about-container {
-        gap: 30px;
-    }
+    /* About, Skills, Contact adjustments remain consistent */
     .about-image {
         width: 250px;
         height: 250px;
-        padding: 0;
-    }
-    .about-image img {
-        max-width: 100%; 
-        width: 100%;
-        height: 100%;
     }
     .about-text {
         max-width: 400px; 
         width: 90%; 
-        padding: 30px;
-        border-radius: 30px;
-        text-align: left; 
-        margin: 0 auto;
-    }
-    .about-text p {
-        font-size: 1rem; 
-    }
-    
-    /* Skills section adjustments for mobile layout */
-    .skills-section {
-        padding: 60px 15px; 
-    }
-    .skills-section h2 {
-        font-size: 2rem;
-        margin-bottom: 40px;
-    }
-    .skill-card {
-        padding: 25px;
-        flex: 1 1 100%; 
-        max-width: none;
-    }
-    .icon-list {
-        gap: 12px;
-    }
-    .icon-list img {
-        width: 40px;
-        height: 40px;
-    }
-
-    /* Contact Section Mobile Adjustments */
-    .contact-content-wrapper {
-        flex-direction: column;
-        gap: 30px;
     }
     .contact-image-wrapper {
-        order: -1; 
         width: 200px;
         height: 200px;
-        box-shadow: 0 0 30px rgba(12, 255, 41, 0.5);
     }
     .contact-form {
-        padding: 30px;
         width: 90%;
-    }
-    .contact-form-container {
-        max-width: none;
     }
 }
 
 
 /* ================================================= */
-/* 5. DARK MODE STYLES (UPDATED) */
+/* 5. DARK MODE STYLES */
 /* ================================================= */
 
-/* Apply dark background and light text to the entire body */
 body.dark-mode {
     background-color: var(--body-bg); 
     color: var(--text-color); 
 }
 
-/* Change icon color for dark mode (e.g., if you want a subtle sun icon instead of moon) */
 .dark-mode .icon-button {
-    color: #fce38a; /* Subtle yellow/gold for the sun icon in dark mode */
+    color: #fce38a;
 }
 .dark-mode .lang-dropdown-content {
     background-color: #1e1e1e;
@@ -981,8 +925,6 @@ body.dark-mode {
     color: var(--text-color);
 }
 
-
-/* Override background colors for light elements (e.g., cards, forms) */
 .dark-mode .about-text,
 .dark-mode .skill-card,
 .dark-mode .project-card,
@@ -993,14 +935,12 @@ body.dark-mode {
     transition: background-color 0.5s, box-shadow 0.5s; 
 }
 
-/* Ensure headings and titles remain readable */
 .dark-mode .about-text .about-title,
 .dark-mode .skill-card h3,
 .dark-mode .project-card h3 {
-    color: var(--primary-color); /* Keep the green highlight */
+    color: var(--primary-color); 
 }
 
-/* Fix text color inside contact form inputs */
 .dark-mode .contact-form input,
 .dark-mode .contact-form textarea {
     background-color: #2c2c2c;
@@ -1008,7 +948,6 @@ body.dark-mode {
     color: var(--text-color);
 }
 
-/* Fix text color for paragraphs/descriptions that were specifically set to black */
 .dark-mode p {
     color: var(--text-color);
 }
