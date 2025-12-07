@@ -182,45 +182,45 @@
             </div>
         </section>
 
-        <section id="contact" class="contact-section">
+              <section id="contact" class="contact-section">
             <h2 data-i18n="contact_heading">Want to collaborate or hire me?</h2>
             <p class="contact-intro" data-i18n="contact_intro_p">
                 Whether you have a project idea, a job opportunity, or just want to say hello, feel free to reach out using the form below!
             </p>
             <div class="contact-content-wrapper">
                 <div class="contact-image-wrapper">
-                    <img src="images/cute_animal.jpg" alt="Contact Icon"> </div>
+                    <img src="images/cute_animal.jpg" alt="Contact Icon"> 
+                </div>
                 <div class="contact-form-container">
-                    <form class="contact-form" action="YOUR_FORM_ENDPOINT_HERE" method="POST">
+                    
+                    <form class="contact-form" action="https://formsubmit.co/albertpingol38@gmail.com" method="POST">
+                        
+                        <input type="hidden" name="_next" value="https://albertpingol.netlify.app/#contact">
+                        
+                        <input type="hidden" name="_subject" value="New Portfolio Inquiry from Albert Pingol Site">
+        
                         <div class="form-group">
                             <label for="name" data-i18n="form_name_label">Name:</label>
                             <input type="text" id="name" name="name" placeholder="Your Full Name" required data-i18n-placeholder="form_name_ph">
                         </div>
-                       <form class="contact-form" action="https://formsubmit.co/YOUR_EMAIL_ADDRESS@example.com" method="POST">
-    <input type="hidden" name="_next" value="https://www.yourdomain.com/index.html#contact">
-    
-    <input type="hidden" name="_subject" value="New Portfolio Inquiry from Albert Pingol Site">
-
-    <div class="form-group">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" placeholder="Your Full Name" required>
-    </div>
-
-    <div class="form-group">
-        <label for="email" data-i18n="form_email_label">Email:</label>
-        <input type="email" id="email" name="email" placeholder="your.email" required data-i18n-placeholder="form_email_ph">
-    </div>
-    <div class="form-group">
-        <label for="subject" data-i18n="form_subject_label">Subject:</label>
-        <input type="text" id="subject" name="subject" placeholder="Briefly what this is about" required data-i18n-placeholder="form_subject_ph">
-    </div>
-    <div class="form-group">
-        <label for="message" data-i18n="form_message_label">Message:</label>
-        <textarea id="message" name="message" rows="5" placeholder="Tell me about your project or inquiry" data-i18n-placeholder="form_message_ph"></textarea>
-    </div>
-    
-    <button type="submit" class="submit-btn" data-i18n="form_button">Send Message</button>
-</form>
+        
+                        <div class="form-group">
+                            <label for="email" data-i18n="form_email_label">Email:</label>
+                            <input type="email" id="email" name="email" placeholder="your.email" required data-i18n-placeholder="form_email_ph">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject" data-i18n="form_subject_label">Subject:</label>
+                            <input type="text" id="subject" name="subject" placeholder="Briefly what this is about" required data-i18n-placeholder="form_subject_ph">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message" data-i18n="form_message_label">Message:</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Tell me about your project or inquiry" data-i18n-placeholder="form_message_ph"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn" data-i18n="form_button">Send Message</button>
+                    </form>
                 </div>
             </div>
         </section>
@@ -233,5 +233,6 @@
     <script src="js/script.js"></script>
 </body>
 </html>
+
 
 
