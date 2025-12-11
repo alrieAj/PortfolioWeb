@@ -212,34 +212,42 @@
                 </div>
                <div class="contact-form-container">
     
-    <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/success">
-        
-        <input type="hidden" name="form-name" value="contact" />
-        
-        <input type="netlify-honeypot" name="bot-field" hidden /> 
-
-        <div class="form-group">
-            <label for="name" data-i18n="form_name_label">Name:</label>
-            <input type="text" id="name" name="name" placeholder="Your Full Name" required data-i18n-placeholder="form_name_ph">
-        </div>
+  <form class="contact-form" 
+      name="contact" 
+      method="POST" 
+      data-netlify="true" 
+      netlify-honeypot="bot-field"
+      action="/success">
     
-        <div class="form-group">
-            <label for="email" data-i18n="form_email_label">Email:</label>
-            <input type="email" id="email" name="email" placeholder="your.email" required data-i18n-placeholder="form_email_ph">
-        </div>
-        
-        <div class="form-group">
-            <label for="subject" data-i18n="form_subject_label">Subject:</label>
-            <input type="text" id="subject" name="form-subject" placeholder="Briefly what this is about" required data-i18n-placeholder="form_subject_ph">
-        </div>
-        
-        <div class="form-group">
-            <label for="message" data-i18n="form_message_label">Message:</label>
-            <textarea id="message" name="form-message" rows="5" placeholder="Tell me about your project or inquiry" data-i18n-placeholder="form_message_ph"></textarea>
-        </div>
+    <!-- Required hidden fields -->
+    <input type="hidden" name="form-name" value="contact">
+    <input type="hidden" name="bot-field">
 
-        <button type="submit" class="submit-btn" data-i18n="form_button">Send Message</button>
-    </form>
+    <div class="form-group">
+        <label for="name" data-i18n="form_name_label">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Your Full Name" required data-i18n-placeholder="form_name_ph">
+    </div>
+
+    <div class="form-group">
+        <label for="email" data-i18n="form_email_label">Email:</label>
+        <input type="email" id="email" name="email" placeholder="your.email" required data-i18n-placeholder="form_email_ph">
+    </div>
+
+    <div class="form-group">
+        <label for="subject" data-i18n="form_subject_label">Subject:</label>
+        <input type="text" id="subject" name="subject" placeholder="Briefly what this is about" required data-i18n-placeholder="form_subject_ph">
+    </div>
+
+    <div class="form-group">
+        <label for="message" data-i18n="form_message_label">Message:</label>
+        <textarea id="message" name="message" rows="5" placeholder="Tell me about your project or inquiry" data-i18n-placeholder="form_message_ph"></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn" data-i18n="form_button">
+        Send Message
+    </button>
+</form>
+
 </div>
             </div>
         </section>
@@ -252,3 +260,4 @@
     <script src="js/script.js"></script>
 </body>
 </html>
+
