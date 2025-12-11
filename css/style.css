@@ -14,6 +14,7 @@
     --border-color: rgba(255, 255, 255, 0.1);
     --header-height-desktop: 80px; /* Calculated based on padding: 15px + logo height 50px */
     --header-height-mobile: 60px; /* Standard mobile header height */
+    --mobile-nav-link-color: white; /* Default for mobile nav links */
 }
 
 /* Dark Mode Variable Overrides */
@@ -22,6 +23,7 @@ body.dark-mode {
     --body-bg: #121212;
     --header-bg: transparent;
     --icon-hover-bg: rgba(255, 255, 255, 0.1);
+    --nav-mobile-link-color: #f0f0f0;
 }
 
 /* Best practice: Apply box-sizing globally for predictable layouts */
@@ -103,6 +105,11 @@ body.dark-mode .nav-header.scrolled {
     gap: 2rem; 
     margin-left: auto; 
     transition: transform 0.3s ease-in-out; 
+}
+
+/* Desktop: Hide Mobile Profile Info */
+.mobile-profile-info {
+    display: none; 
 }
 
 /* Links list */
@@ -799,38 +806,110 @@ body.dark-mode .nav-header.scrolled {
     
     /* --- MOBILE NAV LINKS FIX (Slide-in Menu) --- */
     .nav-links {
-        /* Hide off-screen to the right by default */
+        /* Use flexbox to stack profile and links vertically */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        /* Positioning remains the same */
         position: fixed;
         top: var(--header-height-mobile); 
         right: -300px; 
-        height: 100vh;
+        height: calc(100vh - var(--header-height-mobile)); /* Use calc for full height below header */
         width: 300px; 
         z-index: 999; 
         background-color: var(--nav-mobile-bg);
         box-shadow: -2px 0 10px rgba(0,0,0,0.8);
         transition: right 0.3s ease-in-out;
-        padding-top: 20px;
+        padding-top: 0; /* Adjusted to 0 to control internal padding better */
+        overflow-y: auto; /* Enable scrolling if content exceeds screen height */
     }
 
     .nav-links.active {
         right: 0; /* Slide in */
     }
 
+    /* --- MOBILE PROFILE INFO STYLES --- */
+
+    .mobile-profile-info {
+        display: flex; /* Show the profile box on mobile */
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0 15px 0; /* Adjusted vertical padding */
+        width: 90%;
+        margin-bottom: 15px; /* Space above the navigation links */
+        border-bottom: 1px solid var(--border-color);
+        color: white; /* Ensure text is visible in the dark menu */
+    }
+
+    .mobile-profile-pic {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 10px;
+        border: 2px solid var(--primary-color);
+        box-shadow: 0 0 10px rgba(12, 255, 41, 0.5);
+    }
+
+    .mobile-contact-details {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .mobile-contact-details p {
+        margin: 2px 0;
+        font-size: 0.9rem;
+        color: white; /* Ensure contact info text is white */
+    }
+    
+    .mobile-contact-details strong {
+        font-size: 1.1rem;
+        color: var(--primary-color); /* Highlight name */
+    }
+
+    .mobile-social-links {
+        display: flex;
+        gap: 15px;
+    }
+
+    .mobile-social-links img {
+        width: 30px;
+        height: 30px;
+        transition: transform 0.3s;
+    }
+    /* END MOBILE PROFILE INFO STYLES */
+
     /* Adjust the navigation list for vertical stacking */
     .nav-links ul {
         flex-direction: column;
         width: 100%;
-        gap: 25px; 
+        /* FIX: Greatly reduced gap/margin/padding for tight list items */
+        gap: 15px; 
         margin: 0;
-        padding: 0 40px; 
+        padding: 0 40px 40px 40px; /* Added bottom padding to make last link accessible */
     }
     
     .nav-links li {
         width: 100%;
         border-bottom: 1px solid var(--border-color);
         padding-bottom: 10px;
+        /* FIX: Resetting any default list item spacing */
+        margin: 0; 
     }
     
+    /* Ensures the last list item doesn't have a border for clean look */
+    .nav-links li:last-child {
+        border-bottom: none;
+    }
+
+    /* Ensures link text is visible/styled correctly */
+    .nav-links ul a {
+        color: var(--mobile-nav-link-color);
+        display: block;
+        font-size: 1.1rem;
+    }
+
     /* --- CONTENT OVERLAP FIX --- */
     
     /* Pushes the first content section down below the fixed header */
@@ -860,6 +939,7 @@ body.dark-mode .nav-header.scrolled {
         width: 250px; 
         height: 250px;
         margin-bottom: 10px;
+        box-shadow: 0 0 10px rgba(12, 255, 41, 0.4);
     }
     .text-content h1 {
         white-space: normal; /* Allow h1 to wrap on mobile */
@@ -1066,4 +1146,3 @@ html[dir="rtl"] .lang-dropdown-content {
         text-align: center;
     }
 }
-
