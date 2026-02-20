@@ -33,7 +33,7 @@ const translations = {
     'name': 'Albert Pingol', 
     'job_title_static': 'Aspirante a IT Full Stack', 
     'job_arch': 'Diseñador', 
-    'job_design': 'Constructor Web', 
+    'job_design': 'Constructor', 
     'job_dev': 'Práctico',
     'home_intro': "¡Hola! Soy un Desarrollador Web, Diseñador y Arquitecto de Aplicaciones que crea soluciones modernas, escalables y fáciles de usar.",
     'about_title': 'Acerca de Mí',
@@ -63,7 +63,7 @@ const translations = {
     'job_title_static': 'Aspiring Full Stack IT', 
     'job_arch': 'Disenyador', 
     'job_design': 'Web Builder', 
-    'job_dev': 'Practitioner',
+    'job_dev': 'Especialista',
     'home_intro': "Kumusta! Ako ay isang Web Developer, Designer, at Application Architect na gumagawa ng moderno at scalable na mga solusyon.",
     'about_title': 'Tungkol sa Akin',
     'about_p1': 'Ako ay isang Web Builder, Graphic Designer, at IT Specialist na may hilig sa paglikha ng mga digital na karanasan na parehong functional at visually engaging. Pinagsasama ko ang mga teknikal na kasanayan sa malikhaing disenyo upang bumuo ng mga website, graphics, at mga solusyon sa IT na mahusay, madaling gamitin, at propesyonal. Mayroon akong hands-on na karanasan sa HTML, CSS, JavaScript, PHP, at mga modernong tool sa disenyo.',
@@ -91,7 +91,7 @@ const translations = {
     'name': 'Albert Pingol', 
     'job_title_static': '全栈 IT 志向者', 
     'job_arch': '设计师', 
-    'job_design': '网页构建师', 
+    'job_design': '专家', 
     'job_dev': '从业者',
     'home_intro': "您好！我是一名网页开发人员、设计师和应用架构师，致力于创建现代化、用户友好且可扩展的解决方案。",
     'about_title': '关于我',
@@ -122,7 +122,7 @@ const translations = {
     'job_title_static': 'Aspiring Full Stack IT', 
     'job_arch': 'Designer', 
     'job_design': 'Web Builder', 
-    'job_dev': 'Praticien',
+    'job_dev': 'Spécialiste',
     'home_intro': "Bonjour ! Je suis un Développeur Web, Designer et Architecte d'Applications qui crée des solutions modernes.",
     'about_title': 'À Propos de Moi',
    'about_p1': 'Je suis un constructeur web, un graphiste et un spécialiste informatique passionné par la création d’expériences numériques à la fois fonctionnelles et visuellement attrayantes. Je combine des compétences techniques avec un design créatif pour développer des sites web, des graphismes et des solutions informatiques efficaces et professionnels. J\'ai une expérience pratique de HTML, CSS, JavaScript, PHP et des outils de conception modernes.',
@@ -152,7 +152,7 @@ const translations = {
     'job_title_static': 'Aspiring Full Stack IT', 
     'job_arch': 'Designer', 
     'job_design': 'Web Builder', 
-    'job_dev': 'Praktiker',
+    'job_dev': 'Spezialist',
     'home_intro': "Hallo! Ich bin ein Webentwickler, Designer und Anwendungsarchitekt, der moderne Lösungen erstellt.",
     'about_title': 'Über Mich',
     'about_p1': 'Ich bin ein Web-Builder, Grafikdesigner und IT-Spezialist mit einer Leidenschaft für die Schaffung digitaler Erlebnisse, die sowohl funktional als auch visuell ansprechend sind. Ich kombiniere technische Fähigkeiten mit kreativem Design, um Websites, Grafiken und IT-Lösungen zu entwickeln, die effizient, benutzerfreundlich und professionell sind. Ich verfüge über praktische Erfahrung in HTML, CSS, JavaScript, PHP und modernen Design-Tools.',
@@ -182,7 +182,7 @@ const translations = {
     'job_title_static': 'طموح تقنية المعلومات المتكاملة', 
     'job_arch': 'مصمم', 
     'job_design': 'باني ويب', 
-    'job_dev': 'ممارس',
+    'job_dev': 'أخصائي',
     'home_intro': "مرحباً! أنا مطور ويب، ومصمم، ومهندس تطبيقات أقوم بإنشاء حلول حديثة وقابلة للتطوير.",
     'about_title': 'عني',
     'about_p1': 'أنا باني ويب، ومصمم جرافيك، وأخصائي تقنية معلومات شغوف بإنشاء تجارب رقمية وظيفية وجذابة بصرياً. أجمع بين المهارات التقنية والتصميم الإبداعي لتطوير مواقع ويب ورسومات وحلول تقنية معلومات فعالة وسهلة الاستخدام واحترافية. لدي خبرة عملية في HTML وCSS وJavaScript وPHP وأدوات التصميم الحديثة.',
@@ -625,3 +625,4 @@ document.addEventListener('DOMContentLoaded', () => {
     if (p && p.catch) p.catch(() => { /* autoplay may be blocked */ });
   }
 });
+
