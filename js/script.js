@@ -206,7 +206,6 @@ const translations = {
     'footer_copyright': '© 2025 ألبرت بينغول. جميع الحقوق محفوظة.'
   }
 };
-
 /* -------------------------
     CONFIG / CONSTANTS
     ------------------------- */
@@ -626,5 +625,3 @@ document.addEventListener('DOMContentLoaded', () => {
     if (p && p.catch) p.catch(() => { /* autoplay may be blocked */ });
   }
 });
-
-
